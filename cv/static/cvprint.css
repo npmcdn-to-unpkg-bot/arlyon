@@ -1,0 +1,21 @@
+#image, .noprint {display: none;}
+
+h1 {
+	color:#000;
+	}
+h2 {
+	color:#000;
+	}
+h4 {
+	color:#000;
+	}
+td {
+	color:#000;
+	}
+tr {
+	color:#000;
+	}
+
+.card {
+	box-shadow: 0 0 0 rgba(0,0,0,0) !important;
+}

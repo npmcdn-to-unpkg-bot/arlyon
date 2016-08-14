@@ -1,0 +1,284 @@
+{% load staticfiles %} {% load i18n %}
+
+<html class="grey darken-4">
+
+<head>
+	<script src="https://use.fontawesome.com/3592dbd121.js"></script>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" href="/static/materialize.css">
+	<link rel="stylesheet" type="text/css" href="{% static 'cv.css' %}">
+	<link rel="stylesheet" href="{% static 'cvprint.css' %}" type="text/css" media="print" />
+	<link rel="shortcut icon" type="image/png" href="favi.png" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Alexander Lyon</title>
+</head>
+
+<body>
+	<div id="header" class="row grey darken-4">
+		<form method="get" action="{% trans '/static/cv/english.pdf' %}">
+			<button class='noprint btn' style='z-index:2'>{% trans 'Print Out' %}</button>
+		</form>
+		<button class='dropdown-button btn' href='#' data-activates='language'>{% trans 'Language' %}</button>
+
+		<ul id='language' class='dropdown-content'>
+			<li><a href=''>Norsk</a></li>
+			<li><a href="">English</a></li>
+		</ul>
+	</div>
+
+	<div class="row">
+		<div class="col s12 m8 offset-m2">
+			<div class="row card print40 print40l">
+				<div class="collection with-header">
+					<div class="collection-header red center">
+						<h3 class="white-text"><strong>Alexander Lyon</strong></h3>
+					</div>
+					<div class="collection-item">
+						<div class="col s12 l2 center printnone">
+							<img class="circle" style="max-height:200px;width:100%;max-width:200px;padding:10px;" src="https://graph.facebook.com/v2.4/10206420201890491/picture?type=square&height=600&width=600&return_ssl_resources=1">
+
+						</div>
+						<div class="col s12 m6 l5 print50">
+							<ul class="collection">
+								<li class="collection-item avatar">
+									<i class="material-icons circle red">email</i>
+									<span class="title">arlyon&#8203;@me.com</span>
+									<label>
+										<br>email</label>
+								</li>
+								<li class="collection-item avatar">
+									<i class="material-icons circle green">phone</i>
+									<span class="title">{% trans 'Phone' %}</span>
+									<label>
+										<br>phone</label>
+								</li>
+							</ul>
+						</div>
+						<div class="col s12 m6 l5 print50">
+							<ul class="collection">
+								<li class="collection-item avatar">
+									<i class="material-icons circle blue">home</i>
+									<span class="title">{% trans 'Address' %}</span>
+									<label>
+										<br>address</label>
+								</li>
+								<li class="collection-item avatar">
+									<i class="material-icons circle amber">cake</i>
+									<span class="title">16th April 1996</span>
+									<label>
+										<br>birthday</label>
+								</li>
+							</ul>
+						</div>
+					</div>
+
+				</div>
+				<div class="row padding printnone">
+					<a href="https://plus.google.com/u/0/+AlexanderLyon-gplus">
+						<div class="chip red darken-3 white-text">
+							<img src="/static/icons/social/google.png" class="circle red"> Google
+						</div>
+					</a>
+					<a href="https://www.facebook.com/alex.the.lyon">
+						<div class="chip blue darken-3 white-text">
+							<img src="/static/icons/social/facebook.png" class="circle blue"> Facebook
+						</div>
+					</a>
+				</div>
+			</div>
+			<div class="row card print40">
+				<div class="collection with-header">
+					<div class="collection-header orange lighten-1 center">
+						<h3 class="white-text"><strong>{% trans 'Personal Info' %}</strong></h3>
+					</div>
+					<div class="collection-item">
+						<p class="flow-text">{% trans "I am a student and the University of Stavanger undertaking a year study of maths. Last year I ran a small tech support business, and spent the rest of my gap year working and travelling in New Zealand where I learned a wide variety of
+							skills. I have also taken part in many extracurriculars at school such as president of the Student Council, and running a sports tournament for a school founded charity. Outside of school, I have worked in a children's club managing games and activities
+							and coached a under-8s football team. I am fascinated with the world around me and like to be engaged. I actively seek to be a valued part of a team, and feel that I can complement any dynamic with my skills." %}</p>
+					</div>
+				</div>
+			</div>
+			<div class="row card">
+				<div class="collection with-header">
+					<div class="collection-header yellow darken-1 center">
+						<h3 class="white-text"><strong>{% trans 'Education' %}</strong></h3>
+					</div>
+					<div class="collection-item">
+						<table id='table'>
+							<thead>
+								<td>{% trans 'Period' %}</td>
+								<td>{% trans 'Institution' %}</td>
+								<td>{% trans 'Course' %}</td>
+							</thead>
+							<tr>
+								<td>August/2015 - {% trans 'June' %}/2016</td>
+								<td>University of Stavanger</td>
+								<td>Advanced Mathematics</td>
+							</tr>
+							<tr>
+								<td>August/2011 - {% trans 'June' %}/2014</td>
+								<td>International School of Stavanger</td>
+								<td>International Baccalaureate</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="row card">
+				<div class="collection with-header">
+					<div class="collection-header green center">
+						<h3 class="white-text"><strong>{% trans 'Work Experience' %}</strong></h3>
+					</div>
+					<div class="collection-item">
+						<table id='table'>
+							<thead>
+								<td>{% trans 'Period' %}</td>
+								<td>{% trans 'Company' %}</td>
+								<td>{% trans 'Position' %}</td>
+							</thead>
+							<tr>
+								<td>{% trans 'July' %}/2013 - August/2013</td>
+								<td>Dana Petroleum</td>
+								<td>{% trans 'Summer Intern' %}</td>
+							</tr>
+							<tr>
+								<td>April/2012 - {% trans 'October' %}/2012</td>
+								<td>Verico A/S</td>
+								<td>{% trans 'Assistant' %}</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="row card">
+				<div class="collection with-header">
+					<div class="collection-header blue center">
+						<h3 class="white-text"><strong>{% trans 'Responsibilities' %}</strong></h3>
+					</div>
+					<div class="collection-item">
+						<table id='table'>
+							<thead>
+								<td>{% trans 'Period' %}</td>
+								<td>{% trans 'Organisation' %}</td>
+								<td>{% trans 'Position' %}</td>
+							</thead>
+							<tr>
+								<td>August/2013 - {% trans 'June' %}/2014</td>
+								<td>International School of Stavanger</td>
+								<td>{% trans 'Student Council President' %}</td>
+							</tr>
+							<tr>
+								<td>August/2012 - {% trans 'June' %}/2014</td>
+								<td>Cameroon Service Project</td>
+								<td>{% trans 'Founded/lead charity to bring water to Cameroon' %}</td>
+							</tr>
+							<tr>
+								<td>August/2012 - {% trans 'October' %}/2013</td>
+								<td>{% trans 'Football Club' %}</td>
+								<td>{% trans 'Trainer for kids under 8' %}</td>
+							</tr>
+							<td>August/2010 - April/2012</td>
+							<td>AWANA</td>
+							<td>{% trans 'Coordinated activities for the church kids club.' %}</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col l6 s12 colbo colbol">
+					<div class="collection with-header">
+						<div class="collection-header indigo center">
+							<h3 class="white-text"><strong>{% trans 'IT Knowledge' %}</strong></h3>
+						</div>
+						<div class="collection-item">
+							<div class="collection">
+								<div class="collection-item">
+									<strong>{% trans 'Operating Systems' %}</strong>
+									<div class="secondary-content"><i class="material-icons">star_rate</i><i class="material-icons">star_rate</i><i class="material-icons">star_rate</i></div>
+								</div>
+								<div class="collection-item">
+									<strong>{% trans 'Excel/Databases' %}</strong>
+									<div class="secondary-content"><i class="material-icons">star_rate</i><i class="material-icons">star_rate</i><i class="material-icons">star_half</i></div>
+								</div>
+								<div class="collection-item">
+									<strong>{% trans 'Photoshop/Illustrator' %}</strong>
+									<div class="secondary-content"><i class="material-icons">star_rate</i><i class="material-icons">star_rate</i><i class="material-icons">star_border</i></div>
+								</div>
+								<div class="collection-item">
+									<strong>{% trans 'Web Frontend' %}</strong>
+									<div class="secondary-content"><i class="material-icons">star_rate</i><i class="material-icons">star_half</i><i class="material-icons">star_border</i></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col l6 s12 colbo">
+					<div class="collection with-header">
+						<div class="collection-header purple darken-2 center">
+							<h3 class="white-text"><strong>{% trans 'Language Skills' %}</strong></h3>
+						</div>
+						<div class="collection-item">
+							<div class="collection">
+								<div class="collection-item">
+									<strong>{% trans 'English' %}</strong>
+									<div class="secondary-content"><i class="material-icons">star_rate</i><i class="material-icons">star_rate</i><i class="material-icons">star_rate</i></div>
+								</div>
+								<div class="collection-item">
+									<strong>{% trans 'Norwegian' %}</strong>
+									<div class="secondary-content"><i class="material-icons">star_rate</i><i class="material-icons">star_rate</i><i class="material-icons">star_half</i></div>
+								</div>
+								<div class="collection-item">
+									<strong>{% trans 'Spanish' %}</strong>
+									<div class="secondary-content"><i class="material-icons">star_rate</i><i class="material-icons">star_border</i><i class="material-icons">star_border</i></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+<script>
+	$('.dropdown-button').dropdown({
+		inDuration: 300,
+		outDuration: 225,
+		constrain_width: false, // Does not change width of dropdown to that of the activator
+		hover: true, // Activate on hover
+		gutter: 0, // Spacing from edge
+		belowOrigin: false, // Displays dropdown below the button
+		alignment: 'left' // Displays dropdown with edge aligned to the left of button
+	});
+</script>
+
+<footer class="page-footer">
+	<div class="container">
+		<div class="row">
+			<div class="col l6 s12">
+				<h5 class="white-text">Footer Content</h5>
+				<p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+			</div>
+			<div class="col l4 offset-l2 s12">
+				<h5 class="white-text">Other Projects</h5>
+				<ul>
+					<li><a class="grey-text text-lighten-3" href="{% url 'stuff' %}">Home Catalog</a></li>
+					<li><a class="grey-text text-lighten-3" href="#!">Link 3</a></li>
+					<li><a class="grey-text text-lighten-3" href="#!">Link 4</a></li>
+					<li><a class="grey-text text-lighten-3" href="{% url 'cv' %}">CV</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="footer-copyright">
+		<div class="container">
+			© 2014 Copyright Text
+			<a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+		</div>
+	</div>
+</footer>
+
+</html>
