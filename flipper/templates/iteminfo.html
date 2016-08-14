@@ -1,0 +1,289 @@
+{% include "flippermenu.html" %} {% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{%static 'css/style.css' %}" />
+
+<script>
+    $(document).ready(function() {
+        $('.gpify').each(numbercrunch)
+        flipTable = $("#fliplist").DataTable({
+            "pagingType": "full_numbers",
+            "initComplete": function(settings, json) {
+                $(".page-footer").css("visibility","visible");
+            },
+            "sDom": '<"top">tip',
+            "order": [[ 0, "desc" ]],
+            responsive: true,
+            ajax: {
+                url: 'flips/json',
+                dataSrc:'',
+            },
+            columns: [
+                {   data: 'buyprice',
+                    "render": function ( data, type ) {
+                        if(type == "display") {
+                            return gpify(data);
+                        }
+                        return data
+                    } },
+                {   data: 'sellprice',
+                    "render": function ( data, type ) {
+                        if(type == "display") {
+                            return gpify(data);
+                        }
+                        return data
+                    } },
+                {   data: 'profitea',
+                    "render": function ( data, type ) {
+                        if(type == "display") {
+                            return gpify(data);
+                        }
+                        return data
+                    } },
+                {   data: 'profittot',
+                    "render": function ( data, type ) {
+                        if(type == "display") {
+                            return gpify(data);
+                        }
+                        return data
+                    } },
+                {   data: 'roi',
+                    "render": function ( data, type ) {
+                        if(type == "display") {
+                            return (data-100).toFixed(1)+'%';
+                        }
+                        return data }
+                },
+                {   data: 'solddate',
+                    "render": function ( data, type ) {
+                        if(type == "display") {
+                            return jQuery.timeago(data);
+                        }
+                        return data
+                    }
+                },
+            ],
+        });
+        priceTable = $("#pricetable").DataTable({
+            "sDom": '<"top">tip',
+            "order": [[ 6, "desc" ]],
+            responsive: true,
+            ajax: {
+                url: 'prices/json',
+                dataSrc:'',
+            },
+            columns: [
+                {   data: 'priceaverage',
+                    "render": function ( data, type ) {
+                        if(type == "display") {
+                            return gpify(data);
+                        }
+                        return data
+                    }
+                },
+                {   data: 'pricehigh',
+                    "render": function ( data, type ) {
+                        if(type == "display") {
+                            return gpify(data);
+                        }
+                        return data
+                    }
+                },
+                {   data: 'pricelow',
+                    "render": function ( data, type ) {
+                        if(type == "display") {
+                            return gpify(data);
+                        }
+                        return data
+                    }
+                },
+                {   data: 'roi',
+                    "render": function ( data, type ) {
+                        if(type == "display") {
+                            return (data*100-100).toFixed(1)+'%'
+                        }
+                        return data
+                    }},
+                {   data: 'buyvolume' },
+                {   data: 'sellvolume',},
+                {   data: 'date',
+                    "render": function ( data, type ) {
+                        if(type == "display") {
+                            return '<div class="tooltipped" data-position="left" data-delay="50" data-tooltip="'+readabletime(data)+'">'+jQuery.timeago(data)+'</div>';
+                        }
+                        return data
+                    }
+                },
+            ],
+        });
+    })
+    setTimeout(function(){
+        $('.tooltipped').tooltip({delay: 50});
+    }, 100);
+    $("#items").addClass("active");
+    $(function () {
+        $('#itemlog').highcharts({
+            chart: {
+                type: 'spline',
+                zoomType: 'x',
+            },
+            title: {
+                text: 'Return on Investment'
+            },
+            subtitle: {
+                text: 'A map of the cumulative buyprice and sell price, the profit being the difference.'
+            },
+            xAxis: {
+                type: 'datetime',
+                dateTimeLabelFormats: { // don't display the dummy year
+                    month: '%e. %b',
+                    year: '%b'
+                },
+                title: {
+                    text: 'Date'
+                }
+            },
+            yAxis: [
+                {
+                    title: {
+                        text: 'Profit'
+                    },
+                },
+                {
+                    title: {
+                        text: 'Return'
+                    },
+                    opposite:true
+                },
+            ],
+            tooltip: {
+                headerFormat: '<b>{series.name}</b><br>',
+                pointFormat: '{point.x:%e. %b}: {point.y:.2f}%'
+            },
+
+            series: [
+                {
+                    name: 'Average Price',
+                    data: {{priceaverage}},
+                },
+                {
+                    name: 'Return on Investment',
+                    yAxis:1,
+                    data: {{roi}},
+                },
+            ]
+        });
+    });
+</script>
+<main>
+    <div style="height:96px;margin:20px;margin-bottom:30px;">
+        <img id="titleimage" src="/static/images/big/{{item.itemid}}.gif" height="96px;" style="display:inline-block;margin-right:10px;">
+        <div style="display:inline-block;vertical-align:top;height:96px;">
+            <h4 style="margin-top:16.5px;margin-bottom:15.5px;height:36px;position:relative;"><b>{{item.name}}</b></h4>
+            <div>{{item.description}}</div>
+        </div>
+        <div id="extra" style="display:inline-block;vertical-align:top;height:96px;padding-left:20px">
+            <div style="margin-top:16.5px;margin-bottom:15.5px;height:36px;position:relative;"><b style="position:absolute;bottom:0;">ID: {{item.itemid}}</b></div>
+            <div>Members: {{item.members}}</div>
+        </div>
+        <div id="extra2" style="display:inline-block;vertical-align:top;height:96px;padding-left:20px">
+            <div style="margin-top:16.5px;margin-bottom:15.5px;height:36px;position:relative;"><b style="position:absolute;bottom:0;">Buy Limit: {{item.buylimit}}</b></div>
+            <div>High Alch: <span class="gpify">{{item.highalch}}</span></div>
+        </div>
+    </div>
+    <div class="row white shadow" id="fliplog">
+        <div class="col s10">
+            <ul class="tabs">
+                <li class="tab col s3" id="table"><a class="amber-text active" href="#pricedata">Previous Flips</a></li>
+                <li class="tab col s3"><a class="amber-text" href="#pricenew">30 Flips</a></li>
+            </ul>
+        </div>
+        <div class="input-field col s2" style="margin:0px;">
+            <button class="btn waves-effect waves-light" id="newflip" type="submit" style="width:100%" name="action">Log New Flip</button>
+        </div>
+        <div id="pricedata" class="col s12">
+            <table id="fliplist" style="width:100%">
+                <thead>
+                    <tr>
+                        <th data-priority="3">Buy Price</th>
+                        <th data-priority="3">Sell Price</th>
+                        <th data-priority="4">Profit Ea.</th>
+                        <th data-priority="4">Profit Tot.</th>
+                        <th data-priority="3">Return</th>
+                        <th data-priority="3">When?</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div id="pricenew" class="col s12">
+            <h2>A NEW FLIP</h2>
+        </div>
+    </div>
+    <div class="row white shadow" id="pricelog" style="height:auto;">
+        <div class="col s10">
+            <ul class="tabs">
+                <li class="tab col s3" id="table"><a class="amber-text active" href="#test1">Price Data</a></li>
+                <li class="tab col s3" id="graph"><a class="amber-text" href="#test2">30 Days</a></li>
+            </ul>
+        </div>
+        <div class="input-field col s2" style="margin:0px;">
+            <button class="btn waves-effect waves-light" type="submit" style="width:100%" name="action">Log New Price</button>
+        </div>
+        <div id="test1" class="col s12">
+            <table id="pricetable" style="width:100%">
+                <thead>
+                    <tr>
+                        <th data-priority="3">Average Price</th>
+                        <th data-priority="1" class="tooltipped" data-position="top" data-delay="50" data-tooltip="What people are listing it for.">Listings</th>
+                        <th data-priority="1" class="tooltipped" data-position="top" data-delay="50" data-tooltip="What people are ordering it for.">Orders</th>
+                        <th data-priority="1" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Return on Investment">ROI</th>
+                        <th data-priority="2">People Buying</th>
+                        <th data-priority="2">People Selling</th>
+                        <th data-priority="1">When?</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div id="test2" class="col s12"><div class="chart" id="itemlog"></div></div>
+    </div>
+</main>
+<script>
+$('#table').on('click', function () {
+    pricetable.responsive.recalc()
+});
+$('#graph').on('click', function () {
+    setTimeout(function(){
+    window.dispatchEvent(new Event('resize'));
+}, 0);
+});
+$('#newflip').on('click', function () {
+    swal({
+  title: 'How many?',
+  text: 'Please enter the number of {{item.name}}s you are buying.',
+  showCancelButton: true,
+  confirmButtonText: 'Continue',
+  cancelButtonText: 'Cancel',
+  reverseButtons:true,
+  input:'text'
+}).then(function(isConfirm) {
+  if (isConfirm === true) {
+    swal(
+      'Deleted!',
+      'Your imaginary file has been deleted.',
+      'success'
+    );
+
+  } else if (isConfirm === false) {
+    swal(
+      'Cancelled',
+      'Your imaginary file is safe :)',
+      'error'
+    );
+
+  } else {
+    // Esc, close button or outside click
+    // isConfirm is undefined
+  }
+});
+});
+</script>
+
+{% include "footer.html" %}

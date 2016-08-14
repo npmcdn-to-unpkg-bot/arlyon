@@ -5,32 +5,32 @@ from .models import Wardrobe, Technology, Movie, Album, Game, Book
 from itertools import chain
 
 def index(request):
-    template = loader.get_template('home.html')
+    template = loader.get_template('catalog/home.html')
     context = {
     }
     return HttpResponse(template.render(context, request))
 
 def contact(request):
-    template = loader.get_template('contact.html')
+    template = loader.get_template('catalog/contact.html')
     context = {
     }
     return HttpResponse(template.render(context, request))
 
 def profile(request):
-    template = loader.get_template('profile.html')
+    template = loader.get_template('catalog/profile.html')
     context = {
     }
     return HttpResponse(template.render(context, request))
 
 def rooms(request):
-    template = loader.get_template('rooms.html')
+    template = loader.get_template('catalog/rooms.html')
     context = {
     }
     return HttpResponse(template.render(context, request))
 
 def catalog(request):
     if request.user.is_authenticated():
-        template = loader.get_template('catalog.html')
+        template = loader.get_template('catalog/catalog.html')
         wardrobe = Wardrobe.objects.filter(user=request.user)
         albums = Album.objects.filter(user=request.user)
         games = Game.objects.filter(user=request.user)
@@ -49,4 +49,4 @@ def catalog(request):
         }
         return HttpResponse(template.render(context, request))
     else:
-        return redirect('/accounts/login/')
+        return redirect('/accounts/login')

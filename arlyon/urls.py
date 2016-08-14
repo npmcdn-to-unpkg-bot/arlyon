@@ -21,4 +21,5 @@ urlpatterns = [
     url(r'^accounts/', include("allauth.urls")),
     url(r'^stuff/', include("website.urls")),
     url(r'^cv/', include("cv.urls")),
+    url(r'^flip/', include('flipper.urls')),
 ]

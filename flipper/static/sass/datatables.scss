@@ -1,0 +1,154 @@
+//
+ // Colour customisation
+ //
+ // `!default` allows overriding variables that are defined before @import
+ //
+
+// Border between the header (and footer) and the table body
+$table-header-border: 1px solid #111111 !default;
+
+// Border of rows / cells
+$table-body-border: 1px solid #dddddd !default;
+
+// Row background colour (hover, striping etc are all based on this colour and
+// calculated automatically)
+$table-row-background: #ffffff !default;
+
+// Row colour, when selected (tr.selected)
+$table-row-selected: #b0bed9 !default;
+
+// Text colour of the interaction control elements (info, filter, paging etc)
+$table-control-color: rgba(0,0,0,.86) !default;
+
+// Highlight colour of the paging button for the current page
+$table-paging-button-active: #dcdcdc !default;
+
+// Hover colour of paging buttons on mouse over
+$table-paging-button-hover: #111111 !default;
+
+// Colour to use when shading
+$table-shade: black !default;
+
+// jQuery UI stylesheet imports this one - there are just two places where we
+// don't want DataTabels default styles assigned for jQuery UI, so rather than
+// duplicating the whole file, this is the best option
+$jqueryui: false !default;
+
+
+//
+// Functions / mixins
+//
+@function tint( $color, $percent ) {
+    @return mix(white, $color, $percent);
+}
+
+@function shade( $color, $percent ) {
+    @return mix($table-shade, $color, $percent);
+}
+
+@mixin gradient( $from, $to ) {
+    background-color: $from;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,$from), color-stop(100%,$to)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,     $from 0%, $to 100%); /* Chrome10+,Safari5.1+ */
+    background:    -moz-linear-gradient(top,     $from 0%, $to 100%); /* FF3.6+ */
+    background:     -ms-linear-gradient(top,     $from 0%, $to 100%); /* IE10+ */
+    background:      -o-linear-gradient(top,     $from 0%, $to 100%); /* Opera 11.10+ */
+    background:         linear-gradient(to bottom, $from 0%, $to 100%); /* W3C */
+}
+
+/*
+ * Control feature layout
+ */
+.dataTables_wrapper {
+
+    .dataTables_info {
+        float: none;
+        text-align: center;
+    }
+
+    // Paging
+    .dataTables_paginate {
+        float: center;
+        text-align: center;
+        padding-top: 0.25em;
+
+        .paginate_button {
+            box-sizing: border-box;
+            display: inline-block;
+            min-width: 1.5em;
+            padding-top: 0.5em;
+            margin-left: 2px;
+            text-align: center;
+            text-decoration: none !important;
+            cursor: pointer;
+            *cursor: hand;
+            font-family: Roboto;
+            font-weight: bold;
+            width:40px;
+            height:40px;
+
+            color: $table-control-color !important;
+            border: 1px solid transparent;
+            border-radius: 2px;
+
+            &.current,
+            &.current:hover {
+                background-color: #ffc107;
+                color: #fff !important;
+
+            }
+
+            &.disabled,
+            &.disabled:hover,
+            &.disabled:active {
+                cursor: default;
+                color: #666 !important;
+                border: 1px solid transparent;
+                background: transparent;
+                box-shadow: none;
+            }
+
+            &:hover {
+            }
+
+            &:active {
+            }
+        }
+
+        .ellipsis {
+            padding: 0 1em;
+        }
+    }
+}
+
+
+// Collapse the two column display of the control elements when the screen is
+// small - the info and paging control get collapsed first as they are wider,
+// and then the length and filter controls
+@media screen and (max-width: 767px) {
+    .dataTables_wrapper {
+        .dataTables_info,
+        .dataTables_paginate {
+            float: none;
+            text-align: center;
+        }
+
+        .dataTables_paginate {
+            margin-top: 0.5em;
+        }
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .dataTables_wrapper {
+        .dataTables_length,
+        .dataTables_filter {
+            float: none;
+            text-align: center;
+        }
+
+        .dataTables_filter {
+            margin-top: 0.5em;
+        }
+    }
+}

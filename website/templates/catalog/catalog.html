@@ -1,0 +1,63 @@
+{% extends 'catalog/menu.html' %}
+{% load account %}
+{% load socialaccount %}
+
+{% block nav_extra %}
+
+{% endblock %}
+
+{% block body %}
+
+<div class="row">
+        <div class="col s12">
+            <ul class="tabs">
+                <li class="tab col s3"><a href="#test1">Wardrobe</a></li>
+                <li class="tab col s3"><a href="#test2">Library</a></li>
+                <li class="tab col s3"><a href="#test3">Technology</a></li>
+            </ul>
+        </div>
+        <div id="test1" class="col s12">
+            <div class="center">
+                {% for item in wardrobe %}
+                    <div class="card"><img src="{{item.type.image}}"> {{item.name}} - {{item.type.name}}</div>
+                {% endfor %}
+            </div>
+        </div>
+        <div id="test2" class="col s12">
+            <div class="center">
+                {% for item in albums %}
+                    <div class="card hvr-grow"><a href="album/{{item.id}}" ><img src="/media/{{item.image}}"></a></div>
+                {% endfor %}
+                {% for item in games %}
+                    <div class="card hvr-grow"><a href="game/{{item.id}}" ><img src="/media/{{item.image}}"></a></div>
+                {% endfor %}
+                {% for item in books %}
+                    <div class="card hvr-grow"><a href="book/{{item.id}}" ><img src="/media/{{item.image}}"></a></div>
+                {% endfor %}
+                {% for item in movies %}
+                    <div class="card hvr-grow"><a href="movie/{{item.id}}" ><img src="/media/{{item.image}}"></a></div>
+                {% endfor %}
+            </div>
+        </div>
+        <div id="test3" class="col s12">
+            <ul>
+                {% for item in technology %}
+                    <li>{{item.name}} - {{item.type.name}}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="fixed-action-btn click-to-toggle" style="bottom: 74px; right: 24px;">
+    <a class="btn-floating btn-large blue darken-1">
+        <i class="large material-icons">weekend</i>
+    </a>
+    <ul>
+        <li><a class="btn-floating tooltipped red" data-position="left" data-delay="50" data-tooltip="Wardrobe" href="new/wardrobe"><i class="material-icons">watch</i></a></li>
+        <li><a class="btn-floating tooltipped amber darken-1" data-position="left" data-delay="50" data-tooltip="Library" href="new/library"><i class="material-icons">library_books</i></a></li>
+        <li><a class="btn-floating tooltipped green" data-position="left" data-delay="50" data-tooltip="Technology" href="new/technology"><i class="material-icons">headset</i></a></li>
+    </ul>
+</div>
+
+{% endblock %}
