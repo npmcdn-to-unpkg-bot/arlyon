@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url, include
 from django.contrib import admin
+from . import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -22,4 +23,6 @@ urlpatterns = [
     url(r'^stuff/', include("website.urls")),
     url(r'^cv/', include("cv.urls")),
     url(r'^flip/', include('flipper.urls')),
+    url(r'^kml/', include('program.urls')),
+    url(r'^profile/', views.profile, name='account_profile'),
 ]

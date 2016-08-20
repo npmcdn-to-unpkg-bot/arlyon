@@ -1,0 +1,70 @@
+{% extends "menu.html" %}{% load staticfiles %}
+
+{% block head_title %}Missions{% endblock %}
+
+{% block content %}
+  <div id='mods' class="content">
+      <div>
+          <div id='filters'>
+              <div id='reset' class='filtertags hvr-buzz'><i class="fa fa-trash" aria-hidden="true"></i></div>
+              <ul>
+                  {% for type in missionstatuses %}
+                  <li class='filtertags hvr-shadow' value="{{ type.id }}" style="background-color:#{{type.color}};">{{type.name}}</li>
+                  {% endfor %}
+              </ul>
+              <ul>
+                  {% for program in programs %}
+                  <li class='filtertags hvr-shadow' value="{{ program.code }}" style="background-color:#{{agencyinfo.agency_color.value}};">{{program.code}}</li>
+                  {% endfor %}
+              </ul>
+          </div>
+          <table>
+              <thead id="title">
+                  <td>PRG-ID</td>
+                  <td>Status</td>
+                  <td>Ship</td>
+                  <td>Launcher</td>
+                  <td>Plan</td>
+              </thead>
+              <tbody>
+                  {% for mission in missions %}
+                  <tr class="{{mission.status.id }} {{mission.programid.code}}">
+                      <td class='monospace'><a href="{{mission.id}}"></a>{{ mission.programid }}-{{ mission.missionid }}</td>
+                      <td><div class='filtertags' style="background-color:#{{ mission.status.color }}">{{ mission.status }}</div></td>
+                      <td>{{ mission.ship }}</td>
+                      <td>{% if mission.launcher != null %}{{ mission.launcher }} {% else %} None
+                      </td>
+                      {% endif %}
+                      <td>{{ mission.plan }}</td>
+                  </tr>
+                  {% endfor %}
+              </tbody>
+          </table>
+      </div>
+  </div>
+{% endblock %}
+
+
+<script>
+  {% block pagescript %}
+  document.getElementById("nav_mission").className += " nav_active";
+
+  $("tbody tr").click(function(){
+      window.location.href = $(this).find("a").attr("href");
+  });
+  $(".filtertags").click(function(){
+      if($(this).hasClass("toggled")) {
+          $('.'+$(this).attr("value")).fadeIn();
+          $(this).removeClass("toggled");
+      }
+      else {
+          $('.'+$(this).attr("value")).fadeOut();
+          $(this).addClass("toggled");
+      }
+  });
+  $("#reset").click(function(){
+      location.reload();
+  });
+
+  {% endblock %}
+</script>

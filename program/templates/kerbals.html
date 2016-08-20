@@ -1,0 +1,37 @@
+{% extends "menu.html" %}{% load staticfiles %}
+
+{% block head_title %}Kerbals{% endblock %}
+
+{% block content %}
+<div id='mods' class="content">
+    <div>
+        <table>
+            <thead id="title">
+                <td>Career</td>
+                <td>Name</td>
+                <td>Enlistment Date</td>
+                <td>Experience</td>
+                <td>Status</td>
+            </thead>
+            <tbody>
+                {% for kerbal in kerbalslist %}
+                    <tr>
+                        <td><img style='width:2.5vw;' src='/static/careers/{{kerbal.career}}.png'></img></td>
+                        <td>{{ kerbal.name }}</td>
+                        <td>{{ kerbal.adddate }}</td>
+                        <td>{{ kerbal.experience }}</td>
+                        <td>{{ kerbal.alive }}</td>
+                    </tr>
+                </a>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
+
+<script>
+{% block scripts %}
+document.getElementById("nav_kerbal").className += " nav_active";
+{% endblock %}
+</script>

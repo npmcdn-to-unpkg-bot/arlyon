@@ -1,0 +1,38 @@
+{% extends "menu.html" %}{% load staticfiles %} {% include "backbutton.html" %}
+
+{% block head_title %}Mods{% endblock %}
+{% block content %}
+<div id='mods' class="content">
+    <div>
+        <table>
+            <thead>
+                <tr id="title">
+                    <td>Mod Name</td>
+                    <td>Author</td>
+                    <td>Version</td>
+                    <td>Description</td>
+                    <td>Notes</td>
+                </tr>
+            </thead>
+            {% for mod in modlist %}
+            <tr>
+                <td><a href="{{mod.id}}"></a>{{mod.name}}</td>
+                <td>{{ mod.author }}</td>
+                <td>{{ mod.version }}</td>
+                <td>{{ mod.desc }}</td>
+                <td>{{ mod.notes }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+{% endblock %}
+
+<script>
+{% block scripts %}
+document.getElementById("nav_settings").className += " nav_active";
+$("tbody tr").click(function(){
+  window.location.href = $(this).find("a").attr("href");
+});
+{% endblock %}
+</script>

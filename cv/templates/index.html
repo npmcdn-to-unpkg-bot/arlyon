@@ -5,7 +5,7 @@
 <head>
 	<script src="https://use.fontawesome.com/3592dbd121.js"></script>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<link rel="stylesheet" href="/static/materialize.css">
+	<link rel="stylesheet" href="{% static "shared/css/materialize.css" %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'cv.css' %}">
 	<link rel="stylesheet" href="{% static 'cvprint.css' %}" type="text/css" media="print" />
 	<link rel="shortcut icon" type="image/png" href="favi.png" />
@@ -76,12 +76,12 @@
 				<div class="row padding printnone">
 					<a href="https://plus.google.com/u/0/+AlexanderLyon-gplus">
 						<div class="chip red darken-3 white-text">
-							<img src="/static/icons/social/google.png" class="circle red"> Google
+							<img src="{% static "shared/icons/social/google.png" %}" class="circle red"> Google
 						</div>
 					</a>
 					<a href="https://www.facebook.com/alex.the.lyon">
 						<div class="chip blue darken-3 white-text">
-							<img src="/static/icons/social/facebook.png" class="circle blue"> Facebook
+							<img src="{% static "shared/icons/social/facebook.png" %}" class="circle blue"> Facebook
 						</div>
 					</a>
 				</div>

@@ -1,0 +1,54 @@
+{% extends "menu.html" %}{% load staticfiles %}
+
+{% block head_title %}Settings{% endblock %}
+
+<style>
+{% block style %}
+    .halfwidth {
+        width: 30%;
+        float: right;
+    }
+
+    h2 {
+        float: left;
+    }
+
+    .normal {
+        font-weight: normal;
+    }
+    {% endblock %}
+</style>
+
+{% block content %}
+<div id="agencyinfo" class="content">
+    <div class='row'>
+        <h2 style="float:none;">KSP Directory</h2>
+        <h3 class='normal'>{{agencyinfo.ksp_dir}}</h3>
+    </div>
+    <div class='divider'></div>
+    <div class='row'>
+        <h2>Edit Agency Details</h2><a class="waves-effect waves-light btn-large halfwidth {{agencyinfo.agency_color}}" href='{% url "kml_setup" %}'>Continue</a>
+    </div>
+    <div class='divider'></div>
+    <div class='row'>
+        <h2>Mods List</h2><a class="waves-effect waves-light btn-large halfwidth {{agencyinfo.agency_color}}" href={% url "kml_mod"%}>View</a>
+    </div>
+    <div class='row'>
+        <h2>Import Mod List</h2><a class="waves-effect waves-light btn-large halfwidth {{agencyinfo.agency_color}}" id="import">Import</a>
+    </div>
+    <div class="progress" style="display:none;">
+          <div class="indeterminate"></div>
+    </div>
+</div>
+{% endblock %}
+
+<script>
+{% block script %}
+document.getElementById("nav_settings").className += " nav_active";
+$('#import').click(function(e){
+    e.preventDefault();
+    $('.progress').toggle('display:normal');
+    window.location.href = "/import/mods";
+});
+{% endblock %}
+</script>

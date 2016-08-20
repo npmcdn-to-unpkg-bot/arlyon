@@ -1,0 +1,184 @@
+{% extends "menu.html" %} {% load staticfiles %}
+<link rel="icon" type="image/svg" href="">
+{% block favicon %}{% static mission.programid.image %}{% endblock %}
+{% block head_title %}{{mission.programid.code}}-{{mission.missionid}}{% endblock %}
+
+<style>
+  {% block style %}
+      {% if mission.status.grandstatus.value != 4 %}
+      #end {
+          display: none;
+      }
+      {% endif %}
+      {% if mission.status.grandstatus.value <= 3 %}
+      #missionnodes {
+          display: none;
+      }
+      {% endif %}
+      {% if mission.status.grandstatus.value <= 2 %}
+      #build {
+          display:none;
+      }
+      {% endif %}
+
+      #build {
+          padding-top: 0px;
+          margin-top: 0px;
+          padding-bottom: 0px;
+          margin-bottom: 0px;
+          overflow: hidden;
+      }
+  {% endblock %}
+</style>
+
+<main>
+  {% block content %}
+    <div id='missions' class="content" style="padding:0px;">
+      {% include "backbutton.html" %}
+
+      <div id='program' style="height:16.35vw;background-color:#{{mission.status.color}}">
+          <img src="{% static mission.programid.image %}" style='float:left;margin-right:2vw;height:12.2vw;' class="shadow">
+          <h1 style="padding-top:1vw;"> {{mission.programid.name}} </h1>
+          <h2 class='monospace'> {{mission.programid.code}}-{{mission.missionid}} </h2>
+          <h3 style="padding-top:.6vw;"> {{mission.status}} </h3>
+      </div>
+      <div id='mission' style="padding:3vw;">
+          <div id="plan">
+              <div class='row'>
+                  <div class="col s4">
+                      <h3> Mission Plan </h3>
+                      <h4> {{mission.plan}} </h4>
+                  </div>
+
+                  <div class="col s4">
+                      <h3> Main Ship </h3>
+                      <h4> {{mission.ship}} </h4>
+                  </div>
+                  <div class="col s4">
+                      <h3> Launcher </h3>
+                      <h4> {{mission.launcher}} </h4>
+                  </div>
+              </div>
+          </div>
+          <div id="build" class="build">
+              <div class='divider'></div>
+              <div class='row'>
+                  <div class="col s2">
+                      <h4> Build Date </h4>
+                      <h5 id="builddate">{{mission.builddate}}</h5>
+                  </div>
+
+                  <div class="col s2">
+                      <h4> Funds Before </h4>
+                      <h5> {{mission.fundsbefore}} </h5>
+                  </div>
+                  <div class="col s2">
+                      <h4> Cost </h4>
+                      <h5> {{mission.cost}} </h5>
+                  </div>
+                  <div class="col s2">
+                      <h4> Deltav </h4>
+                      <h5> {{mission.totaldeltav}} </h5>
+                  </div>
+                  <div class="col s2">
+                      <h4> Stages </h4>
+                      <h5> {{mission.stages}} </h5>
+                  </div>
+                  <div class="col s1">
+                      <h4> Parts </h4>
+                      <h5> {{mission.parts}} </h5>
+                  </div>
+                  <div class="col s1">
+                      <h4> Mass </h4>
+                      <h5> {{mission.mass}} </h5>
+                  </div>
+              </div>
+          </div>
+          <div id="missionnodes">
+              <div class='divider'></div>
+              <div class='row'>
+                  <div class="col s4">
+                      <h4> Launch Date </h4>
+                      <h5> {{mission.launchdate}} </h5>
+                  </div>
+
+                  <div class="col s4">
+                      <h4> Crewmembers </h4>
+                      <h5> {{crewlist}} </h5>
+                  </div>
+                  <div class="col s4">
+                      <h4> Notes </h4>
+                      <h5> {{mission.notes}} </h5>
+                  </div>
+              </div>
+          </div>
+          <div id="end">
+              <div class='divider'></div>
+              <div class='row'>
+                  <div class="col s2">
+                      <h4> Recovery Date </h4>
+                      <h5> {{mission.recdate}} </h5>
+                  </div>
+                  <div class="col s10">
+                      <h4> Summary </h4>
+                      <h5> {{mission.summary}} </h5>
+                  </div>
+              </div>
+              <div class='row'>
+                  <div class="col s4">
+                      <h4> Total Science </h4>
+                      <h5> {{mission.totalsci}} </h5>
+                  </div>
+                  <div class="col s4">
+                      <h4> Total Funds </h4>
+                      <h5> {{mission.totalfunds}} </h5>
+                  </div>
+                  <div class="col s4">
+                      <h4> Total Rep </h4>
+                      <h5> {{mission.totalrep}} </h5>
+                  </div>
+              </div>
+              <div class='row'>
+                  <div class="col s4">
+                      <h4> Science Change </h4>
+                      <h5> {{mission.scichange}} </h5>
+                  </div>
+                  <div class="col s4">
+                      <h4> Funds Change </h4>
+                      <h5> {{mission.fundschange}} </h5>
+                  </div>
+                  <div class="col s4">
+                      <h4> Rep Change </h4>
+                      <h5> {{mission.repchange}} </h5>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div style="width:100%; text-align:center">
+          <ul id="addnew" style="width:auto;margin: 0 auto;display:inline-block">
+              {% if mission.status.grandstatus.id == 1 %}
+              <li class='filtertags hvr-shadow actionbutton' style="background-color:#{{agencyinfo.agency_color.value}};" data-value="build"> Build Ship </li>
+              <li class='filtertags hvr-shadow actionbutton' style="background-color:#{{agencyinfo.agency_color.value}};" href="CANCEL"> Cancel Mission </li>
+              {% endif %} {% if mission.status.grandstatus.id == 2 %}
+              <li class='filtertags hvr-shadow actionbutton' style="background-color:#{{agencyinfo.agency_color.value}};"> Begin Mission </li>
+              {% endif %} {% if mission.status.grandstatus.id == 3 %}
+              <li class='filtertags hvr-shadow actionbutton' style="background-color:#{{agencyinfo.agency_color.value}};"> Fly Somewhere Else </li>
+              <li class='filtertags hvr-shadow actionbutton' style="background-color:#{{agencyinfo.agency_color.value}};"> Finish Mission </li>
+              {% endif %}
+          </ul>
+      </div>
+  </div>
+  {% endblock %}
+</main>
+
+<script>
+  {% block script %}
+      document.getElementById("nav_mission").className += " nav_active";
+      $(".actionbutton").click(function(){
+          var toggler = '.'+$(this).attr("data-value");
+          $('.'+$(this).attr("data-value")).slideToggle(400);
+          console.log($('.'+$(this).attr("data-value")))
+          console.log(this);
+      });
+  {% endblock %}
+</script>

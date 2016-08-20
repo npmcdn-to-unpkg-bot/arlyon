@@ -3,7 +3,8 @@ from django.views.generic import RedirectView
 from . import views
 
 urlpatterns = [
-    url(r'^$', views.dashboard, name='flipper'),
+    url(r'^$', views.home, name='flipper'),
+    url(r'^dashboard/$', views.dashboard, name='flipper_dash'),
     url(r'^items/$', views.items, name='flipper_items'),
     url(r'^flips/$', views.flips, name='flipper_flips'),
     url(r'^items/json$', views.itemtable, name='flipper_items_json'),

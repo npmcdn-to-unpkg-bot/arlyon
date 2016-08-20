@@ -1,0 +1,183 @@
+{% include "menu.html" %}
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{%static 'css/style.css' %}" />
+<link rel="icon" type="image/svg" href="{% static agencyinfo.agency_flag %}">
+<title>New Entity</title>
+
+<script>
+    $(document).ready(function() {
+        $('select').material_select();
+    });
+</script>
+
+<a name="mission"></a>
+    {% include "backbutton.html" %}
+<div id='new' class="content">
+    <div id='newmission'>
+        <h2>Plan a New Mission</h2>
+        <!-- kerbal sign up. one year equivalent to 426 days -->
+        <h5>Planning</h5>
+        <div class="row">
+            <form class="col s12" method='POST' action="/missions/new/">{% csrf_token %}
+                <div class="row">
+                    <div class="input-field col s12 m3">
+                        <select class="icons" name="program">
+                            {% for item in programs %}
+                            <option value="{{item.id}}" data-icon="{%static item.image %}">{{item.name}}</option>
+                            {% endfor %}
+                        </select>
+                        <label>Program</label>
+                    </div>
+                    <div class="input-field col s12 m5">
+                        <select class="icons" name="ship1">
+                            {% for item in ships %}
+                            <option value="{{item.id}}">{{item.name}}</option>
+                            {% endfor %}
+                        </select>
+                        <label>Ship</label>
+                    </div>
+                    <div class="input-field col s12 m4">
+                        <select class="icons" name="ship2" class="validate">
+                            <option value="" selected>None</option>
+                            {% for item in launchers %}
+                            <option value="{{item.id}}">{{item.name}}</option>
+                            {% endfor %}
+                        </select>
+                        <label>Launcher</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12 m10">
+                        <input placeholder="The First Ever Satellite!" id="name" name="desc" type="text" class="validate" required>
+                        <label>Description</label>
+                    </div>
+                    <div class="input-field col s12 m1">
+                        <button class="btn waves-effect waves-light {{agencyinfo.agency_color}}" type="submit">Continue
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <a name="kerbal"></a>
+    </div>
+    <div id='newkerbal'>
+        <h2>Register a New Kerbal</h2>
+        <!-- kerbal sign up. one year equivalent to 426 days -->
+        <h5>Now Hiring</h5>
+        <div class="row">
+            <form class="col s12" method="post">{% csrf_token %}
+                    <div class="input-field col s12 m3">
+                        <input placeholder="Jebediah" id="name" name="name" type="text" class="validate">
+                        <label>Kerbal Name</label>
+                    </div>
+                    <div class="input-field col s12 m1">
+                        <input placeholder="1" id="name" name="year" type="text" class="validate">
+                        <label>Enlistment Year</label>
+                    </div>
+                    <div class="input-field col s12 m1">
+                        <input placeholder="1" id="name" name="day" type="text" class="validate">
+                        <label>Enlistment Day</label>
+                    </div>
+                    <div class="input-field col s12 m3">
+                        <select class="icons" name="career">
+                            <option value="" disabled selected>Specify Their Career</option>
+                            <option value="scientist" data-icon="{%static 'careers/scientist.png' %}">Scientist</option>
+                            <option value="engineer" data-icon="{%static 'careers/engineer.png' %}">Engineer</option>
+                            <option value="pilot" data-icon="{%static 'careers/pilot.png' %}">Pilot</option>
+                        </select>
+                        <label>Career</label>
+                    </div>
+                    <div class="input-field col s12 m1">
+                        <button class="btn waves-effect waves-light {{agencyinfo.agency_color}}" type="submit" style="float: left;">Continue</button>
+                    </div>
+            </form>
+        </div>
+    </div>
+    <div id='newship'>
+        <h2>Build a New Craft</h2>
+        <!-- kerbal sign up. one year equivalent to 426 days -->
+        <h5>Construction</h5>
+        <div class="row">
+            <form class="col s12" method='post' action=>{% csrf_token %}
+                <div class="row">
+                    <div class="input-field col s12 m3">
+                        <select class="icons" name='type'>
+                            <option value="" disabled selected>Select Craft File</option>
+                            {% for item in shiptypes %}
+                            <option value="{{item.id}}">{{item.name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="input-field col s12 m9">
+                        <input placeholder="The First Ever Satellite!" id="name" name='description' type="text" class="validate">
+                        <label>Description</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="input-field col s12 m3">
+                        <select class="icons" name='type'>
+                            <option value="" disabled selected>What Type of Ship is it?</option>
+                            {% for item in shiptypes %}
+                            <option value="{{item.id}}" data-icon="{%static item.image %}">{{item.name}}</option>
+                            {% endfor %}
+                        </select>
+                        <label>Ship Type</label>
+                    </div>
+                    <div class="input-field col s12 m2">
+                        <input placeholder="0" id="name" name='cost' type="text" class="validate">
+                        <label>Cost</label>
+                    </div>
+                    <div class="input-field col s12 m2">
+                        <input placeholder="0" id="name" name='deltav' type="text" class="validate">
+                        <label>Deltav</label>
+                    </div>
+                    <div class="input-field col s12 m2">
+                        <input placeholder="0" id="name" name='capacity' type="text" class="validate">
+                        <label>Capacity</label>
+                    </div>
+                    <div class="input-field col s12 m1">
+                        <button class="btn waves-effect waves-light {{agencyinfo.agency_color}}" type="submit">Continue
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div id='newprogram'>
+        <h2>Establish a New Program</h2>
+        <!-- kerbal sign up. one year equivalent to 426 days -->
+        <h5>One Large Step for Kerbal</h5>
+        <div class="row">
+            <form class="col s12">
+                <div class="row">
+                    <div class="input-field col s12 m1">
+                        <input placeholder="KER" id="name" type="text" length="3" class="validate">
+                        <label>Code</label>
+                    </div>
+                    <div class="input-field col s12 m2">
+                        <input placeholder="Kerbal Exploration & Recovery" id="name" type="text" class="validate">
+                        <label>Name</label>
+                    </div>
+                    <div class="input-field col s12 m6">
+                        <input placeholder="An exploratory program to take samples of our home planet." id="name" type="text" class="validate">
+                        <label>Description</label>
+                    </div>
+                    <div class="input-field col s12 m2">
+                        <select class="icons">
+                            <option value="" disabled selected>Choose a Logo</option>
+                            {% for image in program_logos %}
+                            <option value="{{image}}" data-icon="/static/programs/{{image}}">{{image}}</option>
+                            {% endfor %}
+                        </select>
+                        <label>Program Logo</label>
+                    </div>
+                    <div class="input-field col s12 m1">
+                        <button class="btn waves-effect waves-light {{agencyinfo.agency_color}}" type="submit" name="action">Continue
+                            <i class="material-icons right">send</i>
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

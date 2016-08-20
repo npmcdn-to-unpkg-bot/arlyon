@@ -1,0 +1,35 @@
+{% extends "menu.html" %}{% load staticfiles %}
+
+{% block head_title %}Programs{% endblock %}
+
+{% block content %}
+<div id='mods' class="content">
+    <div>
+        <table>
+            <thead id="title">
+                <td>Patch</td>
+                <td>Code</td>
+                <td>Program Name</td>
+                <td>Description</td>
+            </thead>
+            <tbody>
+                {% for program in programslist %}
+                    <tr>
+                        <td><img style='width:2.5vw;' src='/static/{{ program.image }}'></img></td>
+                        <td>{{ program.code }}</td>
+                        <td>{{ program.name }}</td>
+                        <td style='width:50%;'>{{ program.description }}</td>
+                    </tr>
+                </a>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
+
+<script>
+{% block script %}
+document.getElementById("nav_programs").className += " nav_active";
+{% endblock %}
+</script>

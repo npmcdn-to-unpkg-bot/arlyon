@@ -1,224 +1,229 @@
-{% extends "flippermenu.html" %} {% load staticfiles %}
-<link rel="stylesheet" type="text/css" href="{%static 'css/style.css' %}" />
-<main>
-<div id=content>
-    <div class="row shadow" style="padding:0px;height:448px">
-        <div class="col s12" style="padding:0px;">
-          <ul class="tabs">
-            <li class="tab col s3" id="roitab"><a class="amber-text active" href="#test1">Return on Investment</a></li>
-            <li class="tab col s3" id="profittab"><a class="amber-text" href="#test2">Amount of Profit</a></li>
-          </ul>
+{% extends "flipper/menu.html" %}
+
+{% block content %}
+  <main>
+  <div id=content>
+      <div class="row shadow" style="padding:0px;height:448px">
+          <div class="col s12" style="padding:0px;">
+            <ul class="tabs">
+              <li class="tab col s3" id="roitab"><a class="amber-text active" href="#test1">Return on Investment</a></li>
+              <li class="tab col s3" id="profittab"><a class="amber-text" href="#test2">Amount of Profit</a></li>
+            </ul>
+          </div>
+          <div id="test1" class="col s12 nopadding" style="background-color: white;"><div class="chart" style="width:100%;" id="roi"></div></div>
+          <div id="test2" class="col s12 nopadding" style="background-color: white;"><div class="chart" id="profit"></div></div>
         </div>
-        <div id="test1" class="col s12 nopadding" style="background-color: white;"><div class="chart" style="width:100%;" id="roi"></div></div>
-        <div id="test2" class="col s12 nopadding" style="background-color: white;"><div class="chart" id="profit"></div></div>
+
+      <table id='fliplist' width="100%">
+          <thead>
+              <tr>
+                  <th data-priority="2"></th>
+                  <th data-priority="1">Item Name</th>
+                  <th data-priority="2">ID</th>
+                  <th data-priority="3">Buy Price</th>
+                  <th data-priority="3">Sell Price</th>
+                  <th data-priority="4">Profit Ea.</th>
+                  <th data-priority="4">Profit Tot.</th>
+                  <th data-priority="3" class="tooltipped" data-position="top" data-delay="50" data-tooltip="The percentage return you got on your investment.">Return</th>
+                  <th data-priority="3">Date</th>
+              </tr>
+          </thead>
+      </table>
+
       </div>
+  </div>
+  </main>
+{% endblock %}
 
-    <table id='fliplist' width="100%">
-        <thead>
-            <tr>
-                <th data-priority="2"></th>
-                <th data-priority="1">Item Name</th>
-                <th data-priority="2">ID</th>
-                <th data-priority="3">Buy Price</th>
-                <th data-priority="3">Sell Price</th>
-                <th data-priority="4">Profit Ea.</th>
-                <th data-priority="4">Profit Tot.</th>
-                <th data-priority="3" class="tooltipped" data-position="top" data-delay="50" data-tooltip="The percentage return you got on your investment.">Return</th>
-                <th data-priority="3">Date</th>
-            </tr>
-        </thead>
-    </table>
+  <script>
+{% block script %}
 
-    </div>
-</div>
-</main>
-<script>
-    $(document).ready(function() {
-        $("#flips").addClass("active");
-        itemsTable = $("#fliplist").DataTable({
-            "pagingType": "full_numbers",
-            "initComplete": function(settings, json) {
-                $(".page-footer").css("visibility","visible");
-            },
-            "sDom": '<"top">tip',
-            "order": [[ 8, "desc" ]],
-            responsive: true,
-            ajax: {
-                url: '/flips/json',
-                dataSrc:'',
-            },
-            columns: [
-                {   data: 'item',
-                    "render": function ( data ) {
-                        return '<img class="imgicon" style="width:36px;" src="">';
-                    },
-                },
-                {   data: 'name',
-                    "fnCreatedCell": function (nth, sData, oData, iRow, iCol) {
-                        $(nth).html("<a href='/items/"+oData.item+"'>"+oData.name+"</a>" )}
-                },
-                {   data: 'item' },
-                {   data: 'buyprice',
-                    "render": function ( data, type ) {
-                        if(type == "display") {
-                            return gpify(data);
-                        }
-                        return data
-                    } },
-                {   data: 'sellprice',
-                    "render": function ( data, type ) {
-                        if(type == "display") {
-                            return gpify(data);
-                        }
-                        return data
-                    } },
-                {   data: 'profitea',
-                    "render": function ( data, type ) {
-                        if(type == "display") {
-                            return gpify(data);
-                        }
-                        return data
-                    } },
-                {   data: 'profittot',
-                    "render": function ( data, type ) {
-                        if(type == "display") {
-                            return gpify(data);
-                        }
-                        return data
-                    } },
-                {   data: 'roi',
-                    "render": function ( data, type ) {
-                        if(type == "display") {
-                            return (data-100).toFixed(1)+'%'
-                        }
-                        return data
-                    }
-                },
-                {   data: 'solddate',
-                    "render": function ( data, type ) {
-                        if(type == "display") {
-                            console.log(readabletime(data))
-                            return '<div class="tooltipped" data-position="left" data-delay="50" data-tooltip="'+readabletime(data)+'">'+jQuery.timeago(data)+'</div>';
-                        }
-                        return data
-                    }
-                },
-            ],
-            "fnRowCallback": function (nRow, aData, iDisplayIndex) {
-                $(nRow).each(function(entry) {
-                    image = this.childNodes[0].childNodes[0]
-                    image.setAttribute("src", '/static/images/big/'+aData['item']+'.gif')
-                });
-            }
-        });
-    });
-</script>
+      $(document).ready(function() {
+          $("#flips").addClass("active");
+          itemsTable = $("#fliplist").DataTable({
+              "pagingType": "full_numbers",
+              "initComplete": function(settings, json) {
+                  $(".page-footer").css("visibility","visible");
+              },
+              "sDom": '<"top">tip',
+              "order": [[ 8, "desc" ]],
+              responsive: true,
+              ajax: {
+                  url: '{% url "flipper_flips_json" %}',
+                  dataSrc:'',
+              },
+              columns: [
+                  {   data: 'item',
+                      "render": function ( data ) {
+                          return '<img class="imgicon" style="width:36px;" src="">';
+                      },
+                  },
+                  {   data: 'name',
+                      "fnCreatedCell": function (nth, sData, oData, iRow, iCol) {
+                          $(nth).html("<a href='{% url 'flipper_items' %}"+oData.item+"'>"+oData.name+"</a>" )}
+                  },
+                  {   data: 'item' },
+                  {   data: 'buyprice',
+                      "render": function ( data, type ) {
+                          if(type == "display") {
+                              return gpify(data);
+                          }
+                          return data
+                      } },
+                  {   data: 'sellprice',
+                      "render": function ( data, type ) {
+                          if(type == "display") {
+                              return gpify(data);
+                          }
+                          return data
+                      } },
+                  {   data: 'profitea',
+                      "render": function ( data, type ) {
+                          if(type == "display") {
+                              return gpify(data);
+                          }
+                          return data
+                      } },
+                  {   data: 'profittot',
+                      "render": function ( data, type ) {
+                          if(type == "display") {
+                              return gpify(data);
+                          }
+                          return data
+                      } },
+                  {   data: 'roi',
+                      "render": function ( data, type ) {
+                          if(type == "display") {
+                              return (data-100).toFixed(1)+'%'
+                          }
+                          return data
+                      }
+                  },
+                  {   data: 'solddate',
+                      "render": function ( data, type ) {
+                          if(type == "display") {
+                              console.log(readabletime(data))
+                              return '<div class="tooltipped" data-position="left" data-delay="50" data-tooltip="'+readabletime(data)+'">'+jQuery.timeago(data)+'</div>';
+                          }
+                          return data
+                      }
+                  },
+              ],
+              "fnRowCallback": function (nRow, aData, iDisplayIndex) {
+                  $(nRow).each(function(entry) {
+                      image = this.childNodes[0].childNodes[0]
+                      image.setAttribute("src", '/static/images/big/'+aData['item']+'.gif')
+                  });
+              }
+          });
+      });
 
-<script>
-    $(function () {
-        $('#roi').highcharts({
-            chart: {
-                type: 'spline'
-            },
-            title: {
-                text: 'Return on Investment'
-            },
-            subtitle: {
-                text: 'A map of the cumulative buyprice and sell price, the profit being the difference.'
-            },
-            xAxis: {
-                type: 'datetime',
-                dateTimeLabelFormats: { // don't display the dummy year
-                    month: '%e. %b',
-                    year: '%b'
-                },
-                title: {
-                    text: 'Date'
-                }
-            },
-            yAxis: {
-                title: {
-                    text: 'Profit'
-                },
-                min: 0
-            },
-            tooltip: {
-                headerFormat: '<b>{series.name}</b><br>',
-                pointFormat: '{point.x:%e. %b}: {point.y:.2f}%'
-            },
+      $(function () {
+          $('#roi').highcharts({
+              chart: {
+                  type: 'spline'
+              },
+              title: {
+                  text: 'Return on Investment'
+              },
+              subtitle: {
+                  text: 'A map of the cumulative buyprice and sell price, the profit being the difference.'
+              },
+              xAxis: {
+                  type: 'datetime',
+                  dateTimeLabelFormats: { // don't display the dummy year
+                      month: '%e. %b',
+                      year: '%b'
+                  },
+                  title: {
+                      text: 'Date'
+                  }
+              },
+              yAxis: {
+                  title: {
+                      text: 'Profit'
+                  },
+                  min: 0
+              },
+              tooltip: {
+                  headerFormat: '<b>{series.name}</b><br>',
+                  pointFormat: '{point.x:%e. %b}: {point.y:.2f}%'
+              },
 
-            plotOptions: {
-                spline: {
-                    marker: {
-                        enabled: true
-                    }
-                }
-            },
+              plotOptions: {
+                  spline: {
+                      marker: {
+                          enabled: true
+                      }
+                  }
+              },
 
-            series: [ {
-                name: 'Sell Price',
-                data: {{roi}}
-            }]
-        });
-    });
-    $(function () {
-        $('#profit').highcharts({
-            chart: {
-                type: 'areaspline'
-            },
-            title: {
-                text: 'Cumulative Profit'
-            },
-            subtitle: {
-                text: 'A map of the cumulative buyprice and sell price, the profit being the difference.'
-            },
-            xAxis: {
-                type: 'datetime',
-                dateTimeLabelFormats: { // don't display the dummy year
-                    month: '%e. %b',
-                    year: '%b'
-                },
-                title: {
-                    text: 'Date'
-                }
-            },
-            yAxis: {
-                title: {
-                    text: 'Profit'
-                },
-                min: 0
-            },
-            tooltip: {
-                formatter: function () {
-                    return '<b>Amount</b><br/>'+gpify(this.y)
-                }
-            },
+              series: [ {
+                  name: 'Sell Price',
+                  data: {{roi}}
+              }]
+          });
+      });
+      $(function () {
+          $('#profit').highcharts({
+              chart: {
+                  type: 'areaspline'
+              },
+              title: {
+                  text: 'Cumulative Profit'
+              },
+              subtitle: {
+                  text: 'A map of the cumulative buyprice and sell price, the profit being the difference.'
+              },
+              xAxis: {
+                  type: 'datetime',
+                  dateTimeLabelFormats: { // don't display the dummy year
+                      month: '%e. %b',
+                      year: '%b'
+                  },
+                  title: {
+                      text: 'Date'
+                  }
+              },
+              yAxis: {
+                  title: {
+                      text: 'Profit'
+                  },
+                  min: 0
+              },
+              tooltip: {
+                  formatter: function () {
+                      return '<b>Amount</b><br/>'+gpify(this.y)
+                  }
+              },
 
-            plotOptions: {
-                spline: {
-                    marker: {
-                        enabled: true
-                    }
-                }
-            },
+              plotOptions: {
+                  spline: {
+                      marker: {
+                          enabled: true
+                      }
+                  }
+              },
 
-            series: [ {
-                name: 'Sell Price',
-                data: {{profit}}
-            }]
-        });
-    });
-    setTimeout(function(){
-        $('.tooltipped').tooltip({delay: 50});
-    }, 100);
-    $('#profittab').on('click', function () {
-        setTimeout(function(){
-        window.dispatchEvent(new Event('resize'));
-    }, 0);
-    });
-    $('#roitab').on('click', function () {
-        setTimeout(function(){
-        window.dispatchEvent(new Event('resize'));
-    }, 0);
-    });
+              series: [ {
+                  name: 'Sell Price',
+                  data: {{profit}}
+              }]
+          });
+      });
+      setTimeout(function(){
+          $('.tooltipped').tooltip({delay: 50});
+      }, 100);
+      $('#profittab').on('click', function () {
+          setTimeout(function(){
+          window.dispatchEvent(new Event('resize'));
+      }, 0);
+      });
+      $('#roitab').on('click', function () {
+          setTimeout(function(){
+          window.dispatchEvent(new Event('resize'));
+      }, 0);
+      });
+
+{% endblock %}
 </script>

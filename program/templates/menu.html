@@ -1,0 +1,85 @@
+{% extends "skeleton.html" %}{% load staticfiles %}
+
+{% block css %}
+
+<link rel="stylesheet" type="text/css" href="{%static 'css/style.css' %}" />
+<link rel="stylesheet" type="text/css" href="{%static 'css/sidebar.css' %}" />
+<link rel="stylesheet" type="text/css" href="{%static 'css/hover.css' %}" />
+<script type="text/javascript" src="{%static 'scripts/highcharts.js' %}"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+
+{% endblock %}
+
+{% block favicon %}
+{% static agencyinfo.agency_flag %}
+{% endblock %}
+
+{% block style %}
+
+.nav_active {
+    color: #{{agencyinfo.agency_color.value}};
+}
+
+{% endblock %}
+
+{% block head_title %}Kerbal Mission Log{% endblock %}
+
+
+{% block logo_href %}{% url "kml" %}{% endblock %}
+{% block logo_color %}red darken-2{% endblock %}
+{% block logo_icon %}account_balance_wallet{% endblock %}
+{% block app_name  %}Kerbal Mission Log{% endblock %}
+
+{% block menu_links %}{% block menu_links2 %}
+<li><a href="{% url 'kml_agency' %}"><i class="material-icons left">insert_chart</i>Agency Info</a></li>
+{% endblock %}{% endblock %}
+
+{% block nav_extra %}{% endblock %}
+
+{% block body %}
+
+<div id="sidebar">
+    <div id="bar">
+        <a href="{% url "kml_agency" %}">
+            <div id="agency" class="{{agencyinfo.agency_color}}">
+                <img src="{% static agencyinfo.agency_flag %}" class="shadow"/> {{agencyinfo.agency_name}} </img>
+            </div>
+        </a>
+        <div id="navbar">
+            <ul>
+                <a href="{% url "kml_mission" %}">
+                    <li><i class="fa fa-flag" aria-hidden="true" id="nav_mission"></i> Missions</li>
+                </a>
+                <a href="{% url "kml_kerbal" %}">
+                    <li><i class="fa fa-user" aria-hidden="true" id="nav_kerbal"></i> Kerbals</li>
+                </a>
+                <a href="{% url "kml_ship" %}">
+                    <li><i class="fa fa-rocket" aria-hidden="true" id="nav_ship"></i> Ships</li>
+                </a>
+                <a href="{% url "kml_program" %}">
+                    <li><i class="fa fa-globe" aria-hidden="true" id="nav_programs" style='font-size:2vw'></i> Programs</li>
+                </a>
+                <a href="{% url "kml_settings" %}">
+                    <li><i class="fa fa-wrench" aria-hidden="true" id="nav_settings"></i> Settings</li>
+                </a>
+            </ul>
+        </div>
+    </div>
+    <div class="fixed-action-btn" style="bottom: 1.2vw; right: 2.1vw;">
+        <a class="btn-floating btn-large {{agencyinfo.agency_color}}" href="/new">
+            <i class="large material-icons">add</i>
+        </a>
+        <ul>
+            <li><a class="btn-floating red" href="/new#mission"><i class="fa fa-globe" aria-hidden="true"></i></a></li>
+            <li><a class="btn-floating yellow darken-1" href="/new#kerbal"><i class="fa fa-user" aria-hidden="true"></i></a></li>
+            <li><a class="btn-floating green" href="/new#contract"><i class="fa fa-file-text" aria-hidden="true"></i></a></li>
+            <li><a class="btn-floating blue" href="/new#ship"><i class="fa fa-rocket" aria-hidden="true"></i></a></li>
+        </ul>
+    </div>
+</div>
+
+{% block content %}{% endblock %}
+
+{% endblock %}
+
+{% block pagescript %}{% endblock %}

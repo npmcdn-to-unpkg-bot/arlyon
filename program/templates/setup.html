@@ -1,0 +1,82 @@
+{% load staticfiles %}
+<link rel="stylesheet" type="text/css" href="{%static 'css/setup.css' %}" />
+<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<link rel="stylesheet" href="{% static "shared/css/materialize.css" %}">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+<script src="http://code.jquery.com/color/jquery.color-2.1.2.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('select').material_select();
+    });
+</script>
+
+<div class='header content' style='background-color:#{{agencyinfo.agency_color.value}}'>
+    <h1>Welcome to Kerbal Mission Log.</h1>
+    <h1>Let's get you started.</h1>
+</div>
+
+<div class='content'>
+    <h3 style="padding-bottom:3vw">Before we can go any further we need some information.</h3>
+
+    <div style="width:70%; margin-left:auto;margin-right:auto;">
+        <form class="col s12" method='POST' action="/setup/continue">{% csrf_token %}
+            <div class="row">
+                <div class="input-field col s12 m6">
+                    <input placeholder="Kerbodyne" id="name" name="name" type="text" class="validate" required value="{{agencyinfo.agency_name}}">
+                    <label>Agency Name</label>
+                </div>
+                <div class="input-field col s12 m3">
+                    <select name="color" onChange="updateTextColour(this.value)">
+                        {% for color in colors %}
+                        <option value="{{color.value}}" style="color:#{{color.value}} !important;">{{color.name}}</option>
+                        {% endfor %}
+                    </select>
+                    <label>Color</label>
+                </div>
+                <div class="input-field col s12 m3">
+                    <select class="icons" name="flag">
+                        {% for flag in flags %}
+                        <option value="{{flag}}" data-icon="/static/flags/{{flag}}">{{flag}}</option>
+                        {% endfor %}
+                    </select>
+                    <label>Flag</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12 m10">
+                    <input placeholder="C:/Games/Kerbal Space Program/" id="ksp_dir" name="ksp_dir" type="text" class="validate" required value="{{agencyinfo.ksp_dir}}">
+                    <label>Kerbal Space Program Directory</label>
+                </div>
+                <div class="input-field col s12 m1">
+                    <button class="btn waves-effect waves-light" style='background-color:#{{agencyinfo.agency_color.value}}' type="submit">Continue
+                    </button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input placeholder="Sending Kerbals to Space!" id="agency_bio" name="agency_bio" type="text" class="validate" required value="{{agencyinfo.agency_bio}}">
+                    <label>Agency Bio</label>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function updateTextColour(color) {
+            console.log($('.header'))
+            $(".header").animate({
+                "backgroundColor": '#' + color
+            }, {
+                duration: 1000,
+                queue: false,
+            });
+            $(".btn").animate({
+                "backgroundColor": '#' + color
+            }, {
+                duration: 500,
+                queue: false,
+            });
+        }
+    </script>
+</div>

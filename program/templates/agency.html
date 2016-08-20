@@ -1,0 +1,400 @@
+{% extends "menu.html" %}{% load staticfiles %}
+
+{% block head_title %}Graphs{% endblock %}
+
+<script id='moneyovertime'>
+{% block pagescript %}
+    $(function() {
+        // parse the database to get all the needed data
+
+        var allmissions = JSON.parse('{{ missionlist_json|escapejs }}'); // the data for all the missions
+        var allmissionstatuses = JSON.parse('{{ mission_statuses_json|escapejs }}'); // the data for all the mission statuses
+
+        // code for the individual graphs
+
+        // total funds
+
+        var agencyFunds = new Array();
+        for (var mission in allmissions) {
+            propValue = allmissions[mission]
+            agencyFunds.push([propValue['fields']['builddate'], propValue['fields']['fundsbefore'] - propValue['fields']['fundschange']])
+            agencyFunds.push([propValue['fields']['recdate'], propValue['fields']['totalfunds']])
+        }
+
+        agencyFunds = agencyFunds.sort(function(a, b) {
+            return a[0] > b[0] ? 1 : -1;
+        });
+
+        for(var i=1; i<agencyFunds.length; i++) {
+            if(agencyFunds[i][0]==agencyFunds[i-1][0]) {
+                agencyFunds.splice(i, 1)
+            }
+        }
+        for(var i=1; i<agencyFunds.length; i++) {
+            if(agencyFunds[i][0]==agencyFunds[i-1][0]) {
+                agencyFunds.splice(i, 1)
+            }
+        }
+
+        console.log(agencyFunds)
+
+        $('#moneyovertime_graph').highcharts({
+            chart: {
+                type: 'areaspline',
+                zoomType: 'x',
+            },
+            credits: {
+                enabled: false
+            },
+            title: {
+                text: 'Amount of Agency Funds over Time'
+            },
+            subtitle: {
+                text: 'Compiled from the missions list.'
+            },
+            xAxis: {
+                reversed: false,
+                title: {
+                    enabled: true,
+                    text: 'Number of Days'
+                },
+                labels: {
+                    formatter: function() {
+                        return "Day " + this.value;
+                    }
+                },
+                maxPadding: 0.05,
+                showLastLabel: true
+            },
+            yAxis: {
+                title: {
+                    text: 'Funds'
+                },
+                labels: {
+                    formatter: function() {
+                        return this.value + '$';
+                    }
+                },
+                lineWidth: 2
+            },
+            legend: {
+                enabled: false
+            },
+            tooltip: {
+                headerFormat: '<b>{series.name}</b><br/>',
+                pointFormat: 'Day {point.x}: <b>√</b>{point.y}'
+            },
+            plotOptions: {
+                spline: {
+                    marker: {
+                        enable: false
+                    }
+                }
+            },
+            series: [{
+                name: 'Funds',
+                data: agencyFunds,
+                color: '#{{agencyinfo.agency_color.value}}'
+            }]
+        });
+    });
+</script>
+<script id='missionstatuses'>
+    // parse the database to get all the needed data
+
+    var allmissions = JSON.parse('{{ missionlist_json|escapejs }}'); // the data for all the missions
+    var allmissionstatuses = JSON.parse('{{ mission_statuses_json|escapejs }}'); // the data for all the mission statuses
+
+    // code for the individual graphs
+
+    // mission statuses
+
+    var currentMissionStatuses = new Array(); //graph to measure number of missions of particular status
+
+    var propValue;
+
+    for (var object in allmissionstatuses) { // add all the mission statuses to the dataset
+        if (!allmissionstatuses.hasOwnProperty(object)) {
+            continue;
+        }
+        propValue = allmissionstatuses[object];
+        currentMissionStatuses[propValue['pk']] = {
+            color: propValue['fields']['color'],
+            value: 0,
+        };
+    }
+
+    for (var object in allmissions) { // count the number of missions related to each status
+        if (!allmissions.hasOwnProperty(object)) {
+            continue;
+        }
+        propValue = allmissions[object];
+        currentMissionStatuses[propValue['fields']['status']]['value'] += 1;
+    }
+
+    var missionStatusesKeys = Object.keys(currentMissionStatuses); // keys
+    var missionStatusesValues = missionStatusesKeys.map(function(v) {
+        return currentMissionStatuses[v]['value'];
+    }); // data
+    var missionStatusesColors = missionStatusesKeys.map(function(v) {
+        return '#' + currentMissionStatuses[v]['color'];
+    }); // data
+    var missionStatusesLabels = missionStatusesKeys.map(function(v) {
+        return allmissionstatuses[v - 1]['fields']['name'];
+    }); // data
+
+    var missionStatuses = [];
+
+    for (item in missionStatusesKeys) {
+        missionStatuses.push({
+            name: missionStatusesLabels[item],
+            y: missionStatusesValues[item]
+        })
+    }
+
+    $(function() {
+
+        $(document).ready(function() {
+            // Build the chart
+            $('#missionstatuses_graph').highcharts({
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false,
+                    type: 'pie'
+                },
+                colors: missionStatusesColors,
+                title: {
+                    text: 'Mission Statuses'
+                },
+                tooltip: {
+                    pointFormat: 'Number of Missions: <b>{point.y}</b>'
+                },
+                credits: {
+                    enabled: false
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: false,
+                        },
+                        showInLegend: true
+                    }
+                },
+                series: [{
+                    name: 'Mission Statuses',
+                    colorByPoint: true,
+                    data: missionStatuses
+                }]
+            });
+        });
+    });
+</script>
+
+<script id='shiptypes'>
+    // parse the database to get all the needed data
+
+    var allships = JSON.parse('{{ shipslist_json|escapejs }}'); // the data for all the missions
+    var allshiptypes = JSON.parse('{{ shiptypes_json|escapejs }}'); // the data for all the mission statuses
+
+    // code for the individual graphs
+
+    // mission statuses
+
+    var currentShipTypes = new Array(); //graph to measure number of missions of particular status
+
+    var propValue;
+
+    for (var object in allshiptypes) { // add all the mission statuses to the dataset
+        if (!allshiptypes.hasOwnProperty(object)) {
+            continue;
+        }
+        propValue = allshiptypes[object];
+        currentShipTypes[propValue['pk']] = {
+            color: propValue['fields']['color'],
+            value: 0,
+        };
+    }
+
+    for (var object in allships) { // count the number of missions related to each status
+        if (!allships.hasOwnProperty(object)) {
+            continue;
+        }
+        propValue = allships[object];
+        currentShipTypes[propValue['fields']['shiptype']]['value'] += 1;
+    }
+
+    console.log(currentShipTypes)
+
+    var shipTypesKeys = Object.keys(currentShipTypes); // keys
+    var shipTypesValues = shipTypesKeys.map(function(v) {
+        return currentShipTypes[v]['value'];
+    }); // data
+    var shipTypesColors = shipTypesKeys.map(function(v) {
+        return '#' + currentShipTypes[v]['color'];
+    }); // data
+    var shipTypesLabels = shipTypesKeys.map(function(v) {
+        return allshiptypes[v - 1]['fields']['name'];
+    }); // data
+
+    var shipTypes = [];
+
+    for (item in shipTypesKeys) {
+        shipTypes.push({
+            name: shipTypesLabels[item],
+            y: shipTypesValues[item]
+        })
+    }
+
+    console.log(shipTypes)
+
+    $(function() {
+
+        $(document).ready(function() {
+            // Build the chart
+            $('#shiptypes_graph').highcharts({
+                chart: {
+                    plotBackgroundColor: null,
+                    plotBorderWidth: null,
+                    plotShadow: false,
+                    type: 'pie'
+                },
+                title: {
+                    text: 'Types of Ship'
+                },
+                colors: shipTypesColors,
+                tooltip: {
+                    pointFormat: 'Number of Ships: <b>{point.y}</b>'
+                },
+                credits: {
+                    enabled: false
+                },
+                plotOptions: {
+                    pie: {
+                        allowPointSelect: true,
+                        cursor: 'pointer',
+                        dataLabels: {
+                            enabled: false,
+                        },
+                        showInLegend: true
+                    }
+                },
+                series: [{
+                    name: 'Ship Types',
+                    colorByPoint: true,
+                    data: shipTypes
+                }]
+            });
+        });
+    });
+</script>
+<script id='scienceovertime'>
+    $(function() {
+        // parse the database to get all the needed data
+
+        var allmissions = JSON.parse('{{ missionlist_json|escapejs }}'); // the data for all the missions
+        var allmissionstatuses = JSON.parse('{{ mission_statuses_json|escapejs }}'); // the data for all the mission statuses
+
+        // code for the individual graphs
+
+        // total funds
+
+        var agencyFunds = new Array();
+        for (var mission in allmissions) {
+            propValue = allmissions[mission]
+            agencyFunds.push([propValue['fields']['recdate'], propValue['fields']['totalsci']])
+        }
+
+        agencyFunds = agencyFunds.sort(function(a, b) {
+            return a[0] > b[0] ? 1 : -1;
+        });
+
+        for(var i=1; i<agencyFunds.length; i++) {
+            if(agencyFunds[i][0]==agencyFunds[i-1][0]) {
+                agencyFunds.splice(i, 1)
+            }
+        }
+        for(var i=1; i<agencyFunds.length; i++) {
+            if(agencyFunds[i][0]==agencyFunds[i-1][0]) {
+                agencyFunds.splice(i, 1)
+            }
+        }
+
+        $('#scienceovertime_graph').highcharts({
+            chart: {
+                type: 'areaspline',
+                zoomType: 'x',
+            },
+            credits: {
+                enabled: false
+            },
+            title: {
+                text: 'Amount of Agency Science over Time'
+            },
+            subtitle: {
+                text: 'Compiled from the missions list.'
+            },
+            xAxis: {
+                reversed: false,
+                title: {
+                    enabled: true,
+                    text: 'Number of Days'
+                },
+                labels: {
+                    formatter: function() {
+                        return "Day " + this.value;
+                    }
+                },
+                maxPadding: 0.05,
+                showLastLabel: true
+            },
+            yAxis: {
+                title: {
+                    text: 'Science'
+                },
+                labels: {
+                    formatter: function() {
+                        return '⚛'+this.value;
+                    }
+                },
+                lineWidth: 2
+            },
+            legend: {
+                enabled: false
+            },
+            tooltip: {
+                headerFormat: '<b>{series.name}</b><br/>',
+                pointFormat: 'Day {point.x}: <b>⚛</b>{point.y}'
+            },
+            plotOptions: {
+                spline: {
+                    marker: {
+                        enable: false
+                    }
+                }
+            },
+            series: [{
+                name: 'Science',
+                data: agencyFunds,
+                color: '#{{agencyinfo.agency_color.value}}'
+            }]
+        });
+    });
+{% endblock %}
+</script>
+
+
+{% block content %}
+<div id='graphs' class="content">
+    <div class='row'>
+        <div id="missionstatuses_graph" class="col s12 m4"style="margin: 0 auto;"></div>
+        <div id="moneyovertime_graph" class="col s12 m8" style="margin: 0 auto;"></div>
+    </div>
+    <div class='row'>
+        <div id="shiptypes_graph" class="col s12 m4"style="margin: 0 auto;"></div>
+        <div id="scienceovertime_graph" class="col s12 m8" style="margin: 0 auto;"></div>
+    </div>
+</div>
+{% endblock %}

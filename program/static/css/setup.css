@@ -1,0 +1,23 @@
+.content {
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    padding: 3vw;
+    text-align: center;
+    background-color: #FFF;
+}
+
+.header {
+    background-color: rgb(255, 193, 7);
+    color:#fff;
+    text-shadow: 0px .2vw rgba(0,0,0,0.5);
+    border-bottom: .5vw solid rgba(0, 0, 0, 0.5);
+}
+
+h1 {
+    font-size: 1em;
+}
+
+html {
+    overflow: hidden;
+}

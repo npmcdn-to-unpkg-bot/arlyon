@@ -1,0 +1,45 @@
+{% extends "menu.html" %}{% load staticfiles %}
+{% block head_title %}{{ship.name}}{% endblock %}
+{% block favicon %}/static/ships/thumbs/{{ship.name}}.png{% endblock %}
+
+{% block content %}
+<div id='missions' class="content" style="padding:0px;">
+    {% include "backbutton.html" %}
+
+    <div id='program' style="height:16.35vw;background-color:#{{ship.shiptype.color}}">
+        <img src="/static/ships/thumbs/{{ship.name}}.png" style='float:left;margin-right:2vw;height:12.2vw;' class="shadow">
+        <h1 style="padding-top:1vw;"> {{ ship.name }} </h1>
+        <h3 style="padding-top:.6vw;" class='monospace description' > {{ship.desc}} </h3>
+    </div>
+    <div id='ship' class='content' style="height:auto;">
+        <a name="ship"></a>
+        <div class='row'>
+            <div class="col s2">
+                <h3> Type </h3>
+                <h4> {{ship.shiptype.name}} </h4>
+            </div>
+            <div class="col s7">
+                <h3> Description </h3>
+                <h4> {{ship.desc}} </h4>
+            </div>
+            <div class="col s1">
+                <h3> Cost </h3>
+                <h4 class='monospace'> {{ship.cost}} </h4>
+            </div>
+            <div class="col s1">
+                <h3> &Delta;V </h3>
+                <h4 class='monospace'> {{ship.deltav}} </h4>
+            </div>
+            <div class="col s1">
+                <h3> Crew </h3>
+                <h4 class='monospace'> {{ship.deltav}} </h4>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+<script>
+{% block script %}
+document.getElementById("nav_ship").className += " nav_active";
+{% endblock %}

@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'program.apps.ProgramConfig',
     'cv.apps.CvConfig',
     'website.apps.WebsiteConfig',
     'flipper.apps.FlipperConfig',
@@ -46,6 +47,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.reddit',
 ]
 
 MIDDLEWARE = [
@@ -94,7 +96,11 @@ DATABASES = {
     'flipper': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'flipper.sqlite3'),
-    }
+    },
+    'program': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'program.sqlite3'),
+    },
 }
 
 DATABASE_ROUTERS = ['flipper.routers.FlipRouter']
@@ -137,6 +143,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+    '/var/www/static/',
+]
+
 AUTHENTICATION_BACKENDS = [
     # Needed to login by username in Django admin, regardless of `allauth`
     'django.contrib.auth.backends.ModelBackend',
@@ -145,7 +156,7 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 SITE_ID = 1
-LOGIN_REDIRECT_URL = "/profile"
+LOGIN_REDIRECT_URL = "/profile/"
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'

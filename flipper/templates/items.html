@@ -1,91 +1,99 @@
-{% extends "flippermenu.html" %} {% load staticfiles %}
-<link rel="stylesheet" type="text/css" href="{%static 'css/style.css' %}" />
+{% extends "flipper/menu.html" %}
 
+  <script>
 {% block script %}
-<script>
-    $(document).ready(function() {
-        itemsTable = $("#itemslist").DataTable({
-            "pagingType": "full_numbers",
-            "initComplete": function(settings, json) {
-                $(".page-footer").css("visibility","visible");
-            },
-            "sDom": '<"top">tip',
-            "order": [[ 4, "desc" ]],
-            responsive: true,
-            ajax: {
-                url: '/items/json',
-                dataSrc:'',
-            },
-            columns: [
-                {   data: '',
-                    "render": function ( data ) {
-                        return '<img class="imgicon" style="width:36px;height:36px;" src="">';
-                    },
-                },
-                {   data: 'name',
-                    "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-                        $(nTd).html("<a href='"+oData.itemid+"'>"+oData.name+"</a>" )}
-                },
-                {   data: 'itemid' },
-                {   data: 'members',
-                    "render": function ( data ) {
-                        if(data == 'False') {return 'No'}
-                        else {return 'Yes'}
-                    },
-                },
-                {   data: 'profit',
-                    defaultContent: "",
-                    "render": function ( data, type ) {
-                        if(type == "display") {
-                            return gpify(data);
-                        }
-                        return data
-                    },
-                },
-            ],
-            "fnRowCallback": function (nRow, aData, iDisplayIndex) {
-                $(nRow).each(function(entry) {
-                    image = this.childNodes[0].childNodes[0]
-                    image.setAttribute("src", '/static/images/big/'+aData['itemid']+'.gif')
-                });
-            }
-        });
-        $('#searchbar').keyup(function() {
-            itemsTable.search($(this).val()).draw() ;
-        });
-    });
-    $("#items").addClass("active");
-</script>
+
+      $(document).ready(function() {
+          itemsTable = $("#itemslist").DataTable({
+              "pagingType": "full_numbers",
+              "initComplete": function(settings, json) {
+                  $(".page-footer").css("visibility","visible");
+              },
+              "sDom": '<"top">tip',
+              "order": [[ 4, "desc" ]],
+              responsive: true,
+              ajax: {
+                  url: '{% url "flipper_items_json" %}',
+                  dataSrc:'',
+              },
+              columns: [
+                  {   data: '',
+                      "render": function ( data ) {
+                          return '<img class="imgicon" style="width:36px;height:36px;" src="">';
+                      },
+                  },
+                  {   data: 'name',
+                      "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+                          $(nTd).html("<a href='"+oData.itemid+"'>"+oData.name+"</a>" )}
+                  },
+                  {   data: 'itemid' },
+                  {   data: 'members',
+                      "render": function ( data ) {
+                          if(data == 'False') {return 'No'}
+                          else {return 'Yes'}
+                      },
+                  },
+                  {   data: 'profit',
+                      defaultContent: "",
+                      "render": function ( data, type ) {
+                          if(type == "display") {
+                              return gpify(data);
+                          }
+                          return data
+                      },
+                  },
+              ],
+              "fnRowCallback": function (nRow, aData, iDisplayIndex) {
+                  $(nRow).each(function(entry) {
+                      image = this.childNodes[0].childNodes[0]
+                      image.setAttribute("src", '/static/images/big/'+aData['itemid']+'.gif')
+                  });
+              }
+          });
+          $('#searchbar').keyup(function() {
+              itemsTable.search($(this).val()).draw() ;
+          });
+      });
+      $("#items").addClass("active");
+
 {% endblock %}
+  </script>
 
 {% block navaugment %}
-<nav id="search">
-    <div class="nav-wrapper">
-            <div class="input-field">
-                <input id="searchbar" type="search" required>
-                <label for="search"><i class="material-icons">search</i></label>
-                <i class="material-icons">close</i>
-            </div>
-    </div>
-</nav>
+  <nav id="search">
+      <div class="nav-wrapper">
+              <div class="input-field">
+                  <input id="searchbar" type="search" required>
+                  <label for="search"><i class="material-icons">search</i></label>
+                  <i class="material-icons">close</i>
+              </div>
+      </div>
+  </nav>
 {% endblock %}
 
 {% block content %}
-<main>
-    <div id=content>
-        <div class="row" id="orders">
-            <table id="itemslist" class="display" cellspacing="0" width="100%">
-                <thead>
-                    <tr>
-                        <th data-priority="2"></th>
-                        <th data-priority="1">Name</th>
-                        <th data-priority="5">ID</th>
-                        <th data-priority="4">Members?</th>
-                        <th data-priority="3">Profit</th>
-                    </tr>
-                </thead>
-            </table>
-        </div>
-    </div>
-</main>
+  <main>
+      <div id=content>
+          <div class="row" id="orders">
+              <table id="itemslist" class="display" cellspacing="0" width="100%">
+                  <thead>
+                      <tr>
+                          <th data-priority="2"></th>
+                          <th data-priority="1">Name</th>
+                          <th data-priority="5">ID</th>
+                          <th data-priority="4">Members?</th>
+                          <th data-priority="3">Profit</th>
+                      </tr>
+                  </thead>
+              </table>
+          </div>
+      </div>
+  </main>
+{% endblock %}
+
+<style>
+{% block style %}
+nav .input-field input {
+  height:60px;
+}
 {% endblock %}

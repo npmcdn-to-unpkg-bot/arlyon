@@ -1,0 +1,47 @@
+Feature idea:
+    importing images from KVV
+    package as exe - https://algotronics.wordpress.com/2015/10/23/dj2exe/
+    kerbal patch maker - http://forum.kerbalspaceprogram.com/index.php?/topic/109904-kerbal-mission-patch-template-v21-april-24-2016/
+    kerbal flag maker https://github.com/andrewsarnold/FlagMaker-Jr
+    scan ksp save file for contracts, kerbals
+    keep a craft file for each ship
+    stage breakdown (this could either be really easy or really hard)
+    determine mission deltav, part number, cost etc. from the selected ships
+    determine potential of a ship and integrate deltav map
+
+Design Resources:
+    UI Inspiration https://d13yacurqjgara.cloudfront.net/users/149817/screenshots/1646215/attachments/258119/realpixel.png
+    Graphs Inspiration https://d13yacurqjgara.cloudfront.net/users/72830/screenshots/1646404/attachments/258171/Big_original.jpg
+    Color style guide http://hoarrd.github.io/drunken-parrot-flat-ui/
+    https://codemyviews.com/blog/whats-the-deal-with-em-and-rem
+    http://ianlunn.github.io/Hover/ - button animations
+    http://h5bp.github.io/Effeckt.css/ - table animations
+    vivus https://github.com/maxwellito/vivus#vivusjs
+
+Things to consider:
+    look at the http://spaceflight101.com/spacerockets/
+    more responsive menu design
+    detailed stage-by-stage parts list https://www.teuse.net/wiki/ksp/index.php/Junkyard_Rockets_Doberman#Doberman_-_Versions_and_Performance
+
+Useful tools:
+    ksp save file parser https://github.com/bigorangemachine/ksp_js_career_sci_list
+
+References:
+    https://www.teuse.net/wiki/ksp/index.php/v1.0:Daily
+    http://forum.kerbalspaceprogram.com/index.php?/topic/135839-stock-propulsion-laboratory-year-1/
+    https://www.reddit.com/r/KerbalSpaceProgram/comments/4gzjm9/version_2_of_of_my_progress_tracking_spreadsheet/
+
+Potential blockers:
+    How to manage missions with multiple launches? - launch part. progress 'modules'
+
+Checklist before 1.0
+    adding kerbals
+    write a craft parser
+    importing ships (thumbnail, ship info)
+    adding/editing programs
+    add more graphs
+    logging mission progress
+
+Checklist before 2.0
+    progress nodes (all missions start at kerbin, a node specifies one step of the journey)
+    include graphs for programs

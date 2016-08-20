@@ -1,6 +1,121 @@
-{% include "flippermenu.html" %} {% load staticfiles %}
-<link rel="stylesheet" type="text/css" href="{%static 'css/style.css' %}" />
+{% extends "flipper/menu.html" %}
 
+{% block content %}
+<main>
+    <div style="height:96px;margin:20px;margin-bottom:30px;">
+        <img id="titleimage" src="/static/images/big/{{item.itemid}}.gif" height="96px;" style="display:inline-block;margin-right:10px;">
+        <div style="display:inline-block;vertical-align:top;height:96px;">
+            <h4 style="margin-top:16.5px;margin-bottom:15.5px;height:36px;position:relative;"><b>{{item.name}}</b></h4>
+            <div>{{item.description}}</div>
+        </div>
+        <div id="extra" style="display:inline-block;vertical-align:top;height:96px;padding-left:20px">
+            <div style="margin-top:16.5px;margin-bottom:15.5px;height:36px;position:relative;"><b style="position:absolute;bottom:0;">ID: {{item.itemid}}</b></div>
+            <div>Members: {{item.members}}</div>
+        </div>
+        <div id="extra2" style="display:inline-block;vertical-align:top;height:96px;padding-left:20px">
+            <div style="margin-top:16.5px;margin-bottom:15.5px;height:36px;position:relative;"><b style="position:absolute;bottom:0;">Buy Limit: {{item.buylimit}}</b></div>
+            <div>High Alch: <span class="gpify">{{item.highalch}}</span></div>
+        </div>
+    </div>
+    <div class="row white shadow" id="fliplog">
+        <div class="col s10">
+            <ul class="tabs">
+                <li class="tab col s3" id="table"><a class="amber-text active" href="#pricedata">Previous Flips</a></li>
+                <li class="tab col s3"><a class="amber-text" href="#pricenew">30 Flips</a></li>
+            </ul>
+        </div>
+        <div class="input-field col s2" style="margin:0px;">
+            <button class="btn waves-effect waves-light" id="newflip" type="submit" style="width:100%" name="action">Log New Flip</button>
+        </div>
+        <div id="pricedata" class="col s12">
+            <table id="fliplist" style="width:100%">
+                <thead>
+                    <tr>
+                        <th data-priority="3">Buy Price</th>
+                        <th data-priority="3">Sell Price</th>
+                        <th data-priority="4">Profit Ea.</th>
+                        <th data-priority="4">Profit Tot.</th>
+                        <th data-priority="3">Return</th>
+                        <th data-priority="3">When?</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div id="pricenew" class="col s12">
+            <h2>A NEW FLIP</h2>
+        </div>
+    </div>
+    <div class="row white shadow" id="pricelog" style="height:auto;">
+        <div class="col s10">
+            <ul class="tabs">
+                <li class="tab col s3" id="table"><a class="amber-text active" href="#test1">Price Data</a></li>
+                <li class="tab col s3" id="graph"><a class="amber-text" href="#test2">30 Days</a></li>
+            </ul>
+        </div>
+        <div class="input-field col s2" style="margin:0px;">
+            <button class="btn waves-effect waves-light" type="submit" style="width:100%" name="action">Log New Price</button>
+        </div>
+        <div id="test1" class="col s12">
+            <table id="pricetable" style="width:100%">
+                <thead>
+                    <tr>
+                        <th data-priority="3">Average Price</th>
+                        <th data-priority="1" class="tooltipped" data-position="top" data-delay="50" data-tooltip="What people are listing it for.">Listings</th>
+                        <th data-priority="1" class="tooltipped" data-position="top" data-delay="50" data-tooltip="What people are ordering it for.">Orders</th>
+                        <th data-priority="1" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Return on Investment">ROI</th>
+                        <th data-priority="2">People Buying</th>
+                        <th data-priority="2">People Selling</th>
+                        <th data-priority="1">When?</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+        <div id="test2" class="col s12"><div class="chart" id="itemlog"></div></div>
+    </div>
+</main>
+{% endblock %}
+
+{% block script %}
+<script>
+  $('#table').on('click', function () {
+      priceTable.responsive.recalc()
+  });
+  $('#graph').on('click', function () {
+      setTimeout(function(){
+      window.dispatchEvent(new Event('resize'));
+  }, 0);
+  });
+  $('#newflip').on('click', function () {
+      swal({
+    title: 'How many?',
+    text: 'Please enter the number of {{item.name}}s you are buying.',
+    showCancelButton: true,
+    confirmButtonText: 'Continue',
+    cancelButtonText: 'Cancel',
+    reverseButtons:true,
+    input:'text'
+  }).then(function(isConfirm) {
+    if (isConfirm === true) {
+      swal(
+        'Deleted!',
+        'Your imaginary file has been deleted.',
+        'success'
+      );
+
+    } else if (isConfirm === false) {
+      swal(
+        'Cancelled',
+        'Your imaginary file is safe :)',
+        'error'
+      );
+
+    } else {
+      // Esc, close button or outside click
+      // isConfirm is undefined
+    }
+  });
+  });
+</script>
 <script>
     $(document).ready(function() {
         $('.gpify').each(numbercrunch)
@@ -173,117 +288,4 @@
         });
     });
 </script>
-<main>
-    <div style="height:96px;margin:20px;margin-bottom:30px;">
-        <img id="titleimage" src="/static/images/big/{{item.itemid}}.gif" height="96px;" style="display:inline-block;margin-right:10px;">
-        <div style="display:inline-block;vertical-align:top;height:96px;">
-            <h4 style="margin-top:16.5px;margin-bottom:15.5px;height:36px;position:relative;"><b>{{item.name}}</b></h4>
-            <div>{{item.description}}</div>
-        </div>
-        <div id="extra" style="display:inline-block;vertical-align:top;height:96px;padding-left:20px">
-            <div style="margin-top:16.5px;margin-bottom:15.5px;height:36px;position:relative;"><b style="position:absolute;bottom:0;">ID: {{item.itemid}}</b></div>
-            <div>Members: {{item.members}}</div>
-        </div>
-        <div id="extra2" style="display:inline-block;vertical-align:top;height:96px;padding-left:20px">
-            <div style="margin-top:16.5px;margin-bottom:15.5px;height:36px;position:relative;"><b style="position:absolute;bottom:0;">Buy Limit: {{item.buylimit}}</b></div>
-            <div>High Alch: <span class="gpify">{{item.highalch}}</span></div>
-        </div>
-    </div>
-    <div class="row white shadow" id="fliplog">
-        <div class="col s10">
-            <ul class="tabs">
-                <li class="tab col s3" id="table"><a class="amber-text active" href="#pricedata">Previous Flips</a></li>
-                <li class="tab col s3"><a class="amber-text" href="#pricenew">30 Flips</a></li>
-            </ul>
-        </div>
-        <div class="input-field col s2" style="margin:0px;">
-            <button class="btn waves-effect waves-light" id="newflip" type="submit" style="width:100%" name="action">Log New Flip</button>
-        </div>
-        <div id="pricedata" class="col s12">
-            <table id="fliplist" style="width:100%">
-                <thead>
-                    <tr>
-                        <th data-priority="3">Buy Price</th>
-                        <th data-priority="3">Sell Price</th>
-                        <th data-priority="4">Profit Ea.</th>
-                        <th data-priority="4">Profit Tot.</th>
-                        <th data-priority="3">Return</th>
-                        <th data-priority="3">When?</th>
-                    </tr>
-                </thead>
-            </table>
-        </div>
-        <div id="pricenew" class="col s12">
-            <h2>A NEW FLIP</h2>
-        </div>
-    </div>
-    <div class="row white shadow" id="pricelog" style="height:auto;">
-        <div class="col s10">
-            <ul class="tabs">
-                <li class="tab col s3" id="table"><a class="amber-text active" href="#test1">Price Data</a></li>
-                <li class="tab col s3" id="graph"><a class="amber-text" href="#test2">30 Days</a></li>
-            </ul>
-        </div>
-        <div class="input-field col s2" style="margin:0px;">
-            <button class="btn waves-effect waves-light" type="submit" style="width:100%" name="action">Log New Price</button>
-        </div>
-        <div id="test1" class="col s12">
-            <table id="pricetable" style="width:100%">
-                <thead>
-                    <tr>
-                        <th data-priority="3">Average Price</th>
-                        <th data-priority="1" class="tooltipped" data-position="top" data-delay="50" data-tooltip="What people are listing it for.">Listings</th>
-                        <th data-priority="1" class="tooltipped" data-position="top" data-delay="50" data-tooltip="What people are ordering it for.">Orders</th>
-                        <th data-priority="1" class="tooltipped" data-position="top" data-delay="50" data-tooltip="Return on Investment">ROI</th>
-                        <th data-priority="2">People Buying</th>
-                        <th data-priority="2">People Selling</th>
-                        <th data-priority="1">When?</th>
-                    </tr>
-                </thead>
-            </table>
-        </div>
-        <div id="test2" class="col s12"><div class="chart" id="itemlog"></div></div>
-    </div>
-</main>
-<script>
-$('#table').on('click', function () {
-    pricetable.responsive.recalc()
-});
-$('#graph').on('click', function () {
-    setTimeout(function(){
-    window.dispatchEvent(new Event('resize'));
-}, 0);
-});
-$('#newflip').on('click', function () {
-    swal({
-  title: 'How many?',
-  text: 'Please enter the number of {{item.name}}s you are buying.',
-  showCancelButton: true,
-  confirmButtonText: 'Continue',
-  cancelButtonText: 'Cancel',
-  reverseButtons:true,
-  input:'text'
-}).then(function(isConfirm) {
-  if (isConfirm === true) {
-    swal(
-      'Deleted!',
-      'Your imaginary file has been deleted.',
-      'success'
-    );
-
-  } else if (isConfirm === false) {
-    swal(
-      'Cancelled',
-      'Your imaginary file is safe :)',
-      'error'
-    );
-
-  } else {
-    // Esc, close button or outside click
-    // isConfirm is undefined
-  }
-});
-});
-</script>
-
-{% include "footer.html" %}
+{% endblock %}

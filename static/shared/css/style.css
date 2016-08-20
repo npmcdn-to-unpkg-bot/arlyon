@@ -1,0 +1,28 @@
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    background-color: rgb(252, 252, 252);
+;
+}
+main {
+    flex: 1 0 auto;
+}
+
+.brand-logo {
+    font-weight: bold;
+    line-height: 58px;
+    font-size: 2.3rem !important;
+}
+
+footer.page-footer {
+    padding-top: 0px !important;
+}
+
+.socialaccount_providers li {
+    display:inline;
+}
+
+.collection-header {
+    margin:0px !important;
+}

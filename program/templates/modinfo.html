@@ -1,0 +1,13 @@
+{% load staticfiles %} {% include "menu.html" %} {% include "backbutton.html" %}
+<link rel="stylesheet" type="text/css" href="{%static 'css/style.css' %}" />
+<script>document.getElementById("nav_settings").className += " nav_active";</script>
+<link rel="icon" type="image/svg" href="{% static agencyinfo.agency_flag %}">
+<title>{{ mod.name}}</title>
+
+<div id='mods' class="content">
+    <div>
+        <h2>{{ mod.name }} -  [{{ mod.version }}] <a href="{{mod.url}}">(link)</a></h2>
+        <h4>{{ mod.desc}}</h4>
+        <h5>{{ mod.notes}}</h5>
+    </div>
+</div>

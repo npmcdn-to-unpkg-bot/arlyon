@@ -5,17 +5,20 @@
 {% block head_title %}{% trans "Sign Out" %}{% endblock %}
 
 {% block content %}
-<h3>{% trans "Sign Out" %}</h3>
 
-<p>{% trans 'Are you sure you want to sign out?' %}</p>
+<ul class="collection with-header z-depth-0">
+    <li class="collection-header valign-wrapper"><i class="material-icons red-text">warning</i><strong>{% trans "Sign Out" %}</strong><div class="center-block" style="margin-right:0px;"></div></li>
+    <li class="collection-item">
+      <p class="left">{% trans 'Are you sure you want to sign out?' %}</p>
 
-<form method="post" action="{% url 'account_logout' %}" style="center">
-  {% csrf_token %}
-  {% if redirect_field_value %}
-  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
-  {% endif %}
-  <button class="waves-effect waves-light btn" type="submit">{% trans 'Sign Out' %}</button>
-</form>
-
+      <form method="post" action="{% url 'account_logout' %}" style="center">
+        {% csrf_token %}
+        {% if redirect_field_value %}
+        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+        {% endif %}
+        <button class="waves-effect waves-light btn right" type="submit">{% trans 'Sign Out' %}</button>
+      </form>
+    </li>
+</ul>
 
 {% endblock %}

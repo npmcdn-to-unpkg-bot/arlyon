@@ -16,17 +16,14 @@ def contact(request):
     }
     return HttpResponse(template.render(context, request))
 
-def profile(request):
-    template = loader.get_template('catalog/profile.html')
-    context = {
-    }
-    return HttpResponse(template.render(context, request))
-
 def rooms(request):
-    template = loader.get_template('catalog/rooms.html')
-    context = {
-    }
-    return HttpResponse(template.render(context, request))
+    if request.user.is_authenticated():
+        template = loader.get_template('catalog/rooms.html')
+        context = {
+        }
+        return HttpResponse(template.render(context, request))
+    else:
+        return redirect('/accounts/login')
 
 def catalog(request):
     if request.user.is_authenticated():

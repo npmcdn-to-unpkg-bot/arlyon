@@ -1,0 +1,163 @@
+::-webkit-scrollbar {
+    display: none;
+}
+html {
+    overflow-y: inherit;
+}
+body {
+    margin: 0px;
+    font-family: 'arial', sans-serif;
+}
+form {
+    padding: 0px;
+}
+table {
+    width: 100%;
+    cursor: default;
+}
+td {
+    text-align: left;
+}
+tbody tr:hover {
+    background-color: #ccc;
+}
+h1 {
+    margin: 0px;
+    font-weight: bold;
+    font-size: 3.5vw;
+}
+h2 {
+    margin: 0px;
+    font-weight: bold;
+    font-size: 3vw;
+}
+h3 {
+    font-size: 2vw;
+    margin: 0px;
+    font-weight: bold;
+}
+h4 {
+    font-size: 1.5vw;
+    font-weight: bold;
+}
+h5 {
+    font-size: 1vw;
+    font-weight: normal;
+}
+.divider {
+    margin-bottom: 1.5vw;
+    margin-top: 1.5vw;
+}
+.content {
+    width: auto;
+    height: 100%;
+    overflow-y: scroll;
+    padding: 3vw;
+}
+.col {}
+.monospace {
+    font-family: monospace;
+    font-weight: bold;
+}
+.filtertags {
+    padding: 10px;
+    margin: 2px;
+    border-radius: 20px;
+    color: white;
+    font-weight: bold;
+    text-shadow: 0px 1px rgba(0, 0, 0, 0.5);
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    border: solid 1px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    width: auto;
+    display: inline-block;
+}
+.filtertags.toggled {
+    background-color: #999 !important;
+    color: #444;
+    text-shadow: 0px 1px rgba(255, 255, 255, 0.5);
+}
+#filters ul li:hover {
+    border-color: rgba(0, 0, 0, 0.4);
+    position: relative;
+    top: -1px;
+}
+#filters {
+    height: auto;
+    cursor: default;
+    -webkit-user-select: none;
+}
+#filters ul {
+    margin: 0px;
+}
+#filters ul li {
+    line-height: 15px;
+    white-space: nowrap;
+}
+#mods {}
+#mods table {
+    list-style-type: none;
+    margin: 0px;
+    padding: 20px;
+}
+#mods tr {}
+#title {
+    font-weight: bold;
+}
+#agencyinfo p {
+    list-style-type: none;
+    margin: 0px;
+}
+#program {
+    color: #fff;
+    padding: 2vw;
+    text-shadow: 0px .15vw rgba(0, 0, 0, 0.5);
+    border-bottom: .4vw solid rgba(0, 0, 0, 0.4);
+    vertical-align: center;
+    box-shadow: 0px .1vw .05vw rgba(0, 0, 0, 0.8);
+}
+#reset {
+    background-color: #F00;
+    width: 39px;
+    border-radius: 20px;
+    float: left;
+    position: relative;
+    bottom: -2px;
+    margin: 0px;
+    margin-right: 10px;
+}
+#reset:hover {
+    border-color: rgba(0, 0, 0, 0.4);
+}
+.input-field input[type=text]:focus + label {
+    color: #333;
+}
+.input-field input[type=text]:focus {
+    border-bottom: 1px solid #333;
+    box-shadow: 0 1px 0 0 #eee;
+}
+#mission {
+    width: 100%;
+}
+#ship {
+    width: 100%;
+}
+#new h2 {
+    padding-left: 1.5rem;
+}
+#new h5 {
+    padding-left: 1.5rem;
+}
+canvas {
+    padding-bottom: 2vw;
+}
+.description {
+    overflow-y: scroll;
+    height: 6vw;
+}
+
+.header {
+    text-align: center;
+}

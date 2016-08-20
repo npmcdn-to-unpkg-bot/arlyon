@@ -1,4 +1,4 @@
-{% extends 'flippermenu.html' %}
+{% extends 'flipper/menu.html' %}
 
 {% block content %}
   <div id="dashinfo">
@@ -41,15 +41,17 @@
   </main>
 {% endblock %}
 
-{% block script %}
 <script>
-    $(document).ready(function() {
-        $("#dash").addClass("active");
-        $("time.timeago").timeago();
-        $('#itemsort').mixItUp();
-        $('.gpify').each(numbercrunch)
-    });
-    var itemsort = document.getElementById("itemsort");
-    Sortable.create(itemsort, { group: "omega" });
-</script>
+{% block script %}
+
+$(document).ready(function() {
+    $("#dash").addClass("active");
+    $("time.timeago").timeago();
+    $('#itemsort').mixItUp();
+    $('.gpify').each(numbercrunch)
+});
+var itemsort = document.getElementById("itemsort");
+Sortable.create(itemsort, { group: "omega" });
+
 {% endblock %}
+</script>

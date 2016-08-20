@@ -1,0 +1,87 @@
+@font-face {
+  font-family: 'aquino';
+  src:  url('/static/website/fonts/aquino.woff2') format('woff2');
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    background-color: rgb(252, 252, 252);
+;
+}
+main {
+    flex: 1 0 auto;
+}
+h1 {
+    margin: 0px !important;
+}
+h2 {
+    margin: 0px !important;
+}
+
+.page-footer {
+    padding-top: 0px !important;
+}
+
+#decoration {
+    width:100%;
+}
+.cardcontainer {
+    background-color: #FFF;
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0.4);
+    border-radius: 2px;
+    border: solid 1px rgb(224, 224, 224);
+}
+
+.card {
+    background-color: #FFF;
+    box-shadow: 0px 1px 0.1px rgba(0, 0, 0, 0.4);
+    border-radius: 5px !important;
+    display:inline-block;
+    overflow: hidden;
+    margin:5px !important;
+}
+
+.card img {
+    width:100px;
+    max-height: 140px;
+}
+
+.landing {
+    height: calc(100% - 56px);
+    color:#FFF;
+    text-shadow: 0 2px 1px rgba(0,0,0,0.4);
+}
+.features {
+    min-height: calc(100% - 50px);
+}
+
+.aquino {
+    font-family: "aquino" !important;
+}
+
+
+.brand-logo {
+    font-family: "aquino" !important;
+    line-height: 58px;
+    font-size: 2.3rem !important;
+    -webkit-filter: drop-shadow( 0px 2px 0.5px rgba(0,0,0,0.4) );
+            filter: drop-shadow( 0px 2px 0.5px rgba(0,0,0,0.4) );
+}
+
+footer {
+    margin: 0px !important;
+}
+
+.socialaccount_providers li {
+    display:inline;
+}
+
+.collection-header {
+    margin:0px !important;
+}
+
+form {
+    margin-bottom: 0px !important;
+}

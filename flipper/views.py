@@ -11,6 +11,11 @@ from datetime import datetime, timezone, timedelta
 
 # Create your views here.
 
+def home(request):
+    template = loader.get_template('flipper/home.html')
+    context = {
+    }
+    return HttpResponse(template.render(context, request))
 
 def dashboard(request):
     # list current flips, bank value, total flipped
@@ -241,3 +246,9 @@ def fliptable(request):
         f['item'] = theitem.itemid
 
     return JsonResponse(flips_json, safe=False)
+
+def profile(request):
+    template = loader.get_template('flipper/profile.html')
+    context = {
+    }
+    return HttpResponse(template.render(context, request))

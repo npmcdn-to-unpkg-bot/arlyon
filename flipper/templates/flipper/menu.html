@@ -1,0 +1,85 @@
+{% extends "skeleton.html" %}{% load staticfiles %}
+
+{% block css %}
+
+<link rel="stylesheet" type="text/css" href="{%static 'flipper/css/style.css' %}" />
+<link rel="stylesheet" type="text/css" href="{%static "flipper/css/datatables.css"%}">
+
+<script type="text/javascript" src="{%static "flipper/js/jquery.mixitup.js"%}"></script>
+<script type="text/javascript" src="{%static "flipper/js/Sortable.js"%}"></script>
+
+<!--Import React-->
+<script type="text/javascript" src="{%static "shared/js/react.js"%}"></script>
+<script type="text/javascript" src="{%static "shared/js/react-dom.js"%}"></script>
+
+<script type="text/javascript" src="{%static "flipper/js/datatables.min.js"%}"></script>
+<script type="text/javascript" src="{%static "flipper/js/jquery.timeago.js" %}"></script>
+<script type="text/javascript" src="https://code.highcharts.com/highcharts.js"></script>
+
+<!--Import Toaster/Sweetalert-->
+<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script type="text/javascript" src="{% static "js/sweetalert.min.js" %}"></script>
+<link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+<link rel="stylesheet" type="text/css" href="{% static "css/sweetalert.css" %}">
+
+{% endblock %}
+
+{% block head_title %}Flipper{% endblock %}
+
+{% block logo_href %}{% url "flipper" %}{% endblock %}
+{% block logo_color %}amber accent-3{% endblock %}
+{% block logo_icon %}monetization_on{% endblock %}
+{% block app_name  %}Flipper{% endblock %}
+
+{% block menu_links %}{% block menu_links2 %}
+<li id="items"><a href="{% url 'flipper_items' %}"><i class="material-icons right">reorder</i>Items</a></li>
+<li id="flips"><a href="{% url 'flipper_flips' %}"><i class="material-icons right">receipt</i>Flips</a></li>
+<li id="dash"><a href="{% url 'flipper_dash' %}"><i class="material-icons right">dashboard</i>Dashboard</a></li>
+{% endblock %}{% endblock %}
+
+{% block nav_extra %}{% block navaugment %}{% endblock %}{% endblock %}
+{% block body %}{% block content %}{% endblock %}{% endblock %}
+
+<script>
+{% block pagescript %}
+$(document).ready(function() {
+    $(".button-collapse").sideNav();
+})
+
+function numbercrunch() {
+    value = $(this).html()
+    $(this).html(gpify(value))
+}
+
+function gpify(value) {
+    abs = Math.abs(value)
+    if(abs < 10000) {
+        return Math.round(value)+"gp"
+    if(abs > 10000000000) {
+        return (value/1000000).toFixed(1)+"b"
+    }
+    }
+    if(abs > 10000000) {
+        return (value/1000000).toFixed(1)+"m"
+    }
+    if(abs > 10000) {
+        return (value/1000).toFixed(1)+"k"
+    }
+    return ''
+}
+
+function readabletime(iso8601) {
+    MM = ["January", "February","March","April","May","June","July","August","September","October","November", "December"]
+
+    readable = String(new Date(iso8601)).replace(
+    /\w{3} (\w{3}) (\d{2}) (\d{4}) (\d{2}):(\d{2}):[^(]+\(([A-Z]{3})\)/,
+    function($0,$1,$2,$3,$4,$5,$6){
+        return MM[$1]+" "+$2+", "+$3+" - "+$4%12+":"+$5+(+$4>12?"PM":"AM")+" "+$6
+    })
+    return readable
+}
+
+{% block script %}{% endblock %}
+
+{% endblock %}
+</script>

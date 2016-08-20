@@ -1,0 +1,63 @@
+{% extends "menu.html" %}{% load staticfiles %}
+
+{% block head_title %}Ships{% endblock %}
+
+{% block content %}
+<div id='mods' class="content">
+    <div>
+        <div id='filters'>
+            <div id='reset' class='filtertags hvr-buzz'><i class="fa fa-trash" aria-hidden="true"></i></div>
+            <ul>
+                {% for type in shiptypes %}
+                <li class='filtertags hvr-shadow' value="{{ type.name }}" style="background-color:#{{type.color}};">{{type.name}}</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <table>
+            <thead id="title">
+                <td>Name</td>
+                <td>Type</td>
+                <td>Capacity</td>
+                <td>Cost</td>
+                <td>Deltav</td>
+                <td>Description</td>
+            </thead>
+            <tbody>
+                {% for ship in shipslist %}
+                <tr class="{{ ship.shiptype }}">
+                    <td><a href="{{ship.id}}"></a>{{ ship.name }}</td>
+                    <td><div class='filtertags' style="background-color:#{{ ship.shiptype.color }}">{{ ship.shiptype }}</div></td>
+                    <td>{{ ship.crewcapacity }}</td>
+                    <td>{{ ship.cost }}</td>
+                    <td>{{ ship.deltav }}</td>
+                    <td>{{ ship.desc }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
+
+<script>
+{% block script %}
+document.getElementById("nav_ship").className += " nav_active";
+
+$("tbody tr").click(function(){
+    window.location.href = $(this).find("a").attr("href");
+});
+$(".filtertags").click(function(){
+    if($(this).hasClass("toggled")) {
+        $('.'+$(this).attr("value")).fadeIn();
+        $(this).removeClass("toggled");
+    }
+    else {
+        $('.'+$(this).attr("value")).fadeOut();
+        $(this).addClass("toggled");
+    }
+});
+$("#reset").click(function(){
+    location.reload();
+});
+{% endblock %}
+</script>
