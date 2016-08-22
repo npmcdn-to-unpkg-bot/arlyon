@@ -1,44 +1,47 @@
-{% load staticfiles %} {% load i18n %}
+{% extends 'skeleton.html' %}{% load staticfiles %} {% load i18n %}
 
 <html class="grey darken-4">
 
 <head>
-	<script src="https://use.fontawesome.com/3592dbd121.js"></script>
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<link rel="stylesheet" href="{% static "shared/css/materialize.css" %}">
+	{% block css %}
 	<link rel="stylesheet" type="text/css" href="{% static 'cv.css' %}">
 	<link rel="stylesheet" href="{% static 'cvprint.css' %}" type="text/css" media="print" />
-	<link rel="shortcut icon" type="image/png" href="favi.png" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>Alexander Lyon</title>
+	{% endblock %}
+
 </head>
 
+{% block favicon %}favi.png{% endblock %}
+{% block head_title %}Alexander Lyon{% endblock %}
+
+{% block menu_links_unauth %}{% block menu_links_unauth2 %}
+<li><a href="{% url 'flipper' %}"><i class="material-icons left">receipt</i>RuneFlip</a></li>
+<li><a href="{% url 'stuff' %}"><i class="material-icons left">home</i>HomeCatalog</a></li>
+<li><a href="{% url 'kml' %}"><i class="material-icons left">account_balance_wallet</i>Kerbal Mission Log</a></li>
+<li><a href="{% url 'cv' %}"><i class="material-icons left">person</i>CV</a></li>
+{% endblock %}{% endblock %}
+
+{% block body %}
 <body>
-	<div id="header" class="row grey darken-4">
 		<form method="get" action="{% trans '/static/cv/english.pdf' %}">
 			<button class='noprint btn' style='z-index:2'>{% trans 'Print Out' %}</button>
 		</form>
-		<button class='dropdown-button btn' href='#' data-activates='language'>{% trans 'Language' %}</button>
-
-		<ul id='language' class='dropdown-content'>
-			<li><a href=''>Norsk</a></li>
-			<li><a href="">English</a></li>
-		</ul>
-	</div>
 
 	<div class="row">
-		<div class="col s12 m8 offset-m2">
+		<div class="col s12 m10 offset-m1">
 			<div class="row card print40 print40l">
 				<div class="collection with-header">
 					<div class="collection-header red center">
 						<h3 class="white-text"><strong>Alexander Lyon</strong></h3>
 					</div>
 					<div class="collection-item">
-						<div class="col s12 l2 center printnone">
-							<img class="circle" style="max-height:200px;width:100%;max-width:200px;padding:10px;" src="https://graph.facebook.com/v2.4/10206420201890491/picture?type=square&height=600&width=600&return_ssl_resources=1">
-
+						<div class="col s12 l4 center printnone">
+							<div class="valign-wrapper">
+								<div class="valign">
+									<img class="circle" style="max-height:350px;max-width:350px;width:90%;margin-top:8px;" src="https://graph.facebook.com/v2.4/10206420201890491/picture?type=square&height=600&width=600&return_ssl_resources=1">
+								</div>
+							</div>
 						</div>
-						<div class="col s12 m6 l5 print50">
+						<div class="col s12 m6 l8 print50">
 							<ul class="collection">
 								<li class="collection-item avatar">
 									<i class="material-icons circle red">email</i>
@@ -54,7 +57,7 @@
 								</li>
 							</ul>
 						</div>
-						<div class="col s12 m6 l5 print50">
+						<div class="col s12 m6 l8 print50">
 							<ul class="collection">
 								<li class="collection-item avatar">
 									<i class="material-icons circle blue">home</i>
@@ -70,6 +73,7 @@
 								</li>
 							</ul>
 						</div>
+						<div class="clear"></div>
 					</div>
 
 				</div>
@@ -240,6 +244,7 @@
 		</div>
 	</div>
 </body>
+{% endblock %}
 
 <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>

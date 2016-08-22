@@ -1,0 +1,12 @@
+id,missionid,plan,builddate,fundsbefore,cost,totaldeltav,stages,parts,mass,launchdate,summary,recdate,scichange,totalsci,fundschange,totalfunds,repchange,totalrep,launcher_id,programid_id,ship_id,status_id
+1,1,Launch our First Vessel,0,25000,3673,807,1,6,2675,10,"Mission success. Parachutes deployed, Jeb landed safely.",10,16,20,3508,67443,0,10,,1,11,5
+2,2,Splash down in the ocean.,10,22000,3673,807,1,6,2675,10,"mission objective complete, splashdown and recovery",10,11,22,3504,81494,0,12,,1,11,5
+3,3,Test the TR-18A Stack Decoupler,10,82573,1276,0,0,8,1679,14,test successful,14,2,5,1276,76923,0,13,,1,10,5
+4,1,Perform Experiments Around KSC,12,72812,8486,0,0,9,564,32,"samples collected, recodred observations from around KSC",32,41,58,8316,139383,0,19,,2,1,5
+5,3,Perform Experiments Around KSC #3,45,154110,13606,0,0,14,6674,61,samples collected,61,21,47,13334,235846,0,20,,2,1,5
+6,2,Perform Experiments Around KSC #2,32,153465,13606,0,0,14,6674,41,samples collected,41,25,40,13334,160768,0,20,,2,1,4
+7,4,Materials Study Flying Low x2,14,76890,5733,1306,1,12,5177,32,"Mission success, did not slow enough to deploy chutes until 500m, close call.",32,23,31,6215,97429,0,18,,1,11,5
+8,5,Test the SpaceY SRBs,20,72197,7127,1734,1,16,9073,28,"Mission success, did not slow enough to deploy chutes until 500m, close call.",28,23,31,6215,97429,0,18,,1,11,5
+9,6,Materials Study Upper Atmosphere x2,32,154157,6033,1229,1,10,7052,35,"The air intake SRBs did not function, complete loss of craft except for command pod.  Crew safely recovered.",35,0,14,711,141263,0,19,,1,11,7
+10,4,Investigate the Island Airfield,79,128052,9875,0,0,26,4126,95,"Aircraft lost on takeoff, attribuited to uneven runway, crew survived",95,0,44,1372,171053,0,43,,2,9,7
+11,1,FLY,0,0,0,0,0,0,0,0,,0,0,0,0,0,0,0,,6,1,1

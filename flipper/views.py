@@ -23,6 +23,7 @@ def dashboard(request):
     allflips = flip.objects.all()
     activeflips = allflips.filter(solddate=None)
     inactiveflips = allflips.exclude(solddate=None)
+    averageprofit = 0
 
     # determine profit
 
@@ -160,6 +161,7 @@ def flips(request):
     prevsell = 0
 
     for s in sold:
+        print(s)
         stime = tm.mktime(s.solddate.timetuple())*1000
         cumulativebuy = s.buyprice*s.number + prevbuy
         cumulativesell = s.sellprice*s.number + prevsell

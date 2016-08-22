@@ -21,7 +21,7 @@ def index(request):
             return HttpResponseRedirect("setup/")
         return HttpResponseRedirect("missions/")
     else:
-        template = loader.get_template('home.html')
+        template = loader.get_template('landing.html')
         context = {
         }
         return HttpResponse(template.render(context, request))

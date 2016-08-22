@@ -10,3 +10,9 @@ def profile(request):
         return HttpResponse(template.render(context, request))
     else:
         return redirect('/accounts/login')
+
+def landing(request):
+    template = loader.get_template('generic/landing.html')
+    context = {
+    }
+    return HttpResponse(template.render(context, request))

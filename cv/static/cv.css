@@ -3,30 +3,27 @@
 	margin-bottom: -30px;
 	}
 
-.noprint {
-	position:absolute;
-	top:10px;
-	left:10px;
-	}
-
-.dropdown-button {
-	position:absolute;
-	top:10px;
-	right:10px;
-	}
-
-@media screen and (max-width: 992px) {
+@media screen and (max-width: 993px) {
 	#header {
 		margin-bottom: 10px !important;
 		padding:0px !important;
 	}
-
+	.noprint {
+		position:absolute;
+		top:10px;
+		right:10px;
+		}
 }
-@media screen and (min-width: 992px) {
+
+@media screen and (min-width: 993px) {
 	div.colbol {
 		padding-right:10px !important;
 	}
-
+	.noprint {
+		position:absolute;
+		top:10px;
+		left:10px;
+		}
 }
 
 .with-header {
@@ -77,7 +74,7 @@
 	.print40l {
 		float:left;
 	}
-	
+
 	.printnone {
 		display:none;
 	}
@@ -89,4 +86,12 @@
 div.colbo.col {
 	margin-bottom: 14px;
 	padding:0px;
+}
+
+.collection.with-header .collection-item {
+    padding-left: 20px;
+}
+
+.clear{
+clear:both;
 }

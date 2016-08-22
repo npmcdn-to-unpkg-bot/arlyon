@@ -4,8 +4,8 @@ from django.shortcuts import redirect
 from .models import Wardrobe, Technology, Movie, Album, Game, Book
 from itertools import chain
 
-def index(request):
-    template = loader.get_template('catalog/home.html')
+def landing(request):
+    template = loader.get_template('catalog/landing.html')
     context = {
     }
     return HttpResponse(template.render(context, request))

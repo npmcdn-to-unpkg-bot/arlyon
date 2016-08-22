@@ -1,0 +1,78 @@
+{% extends 'menu.html' %}
+{% load account %}
+{% load socialaccount %}
+{% block body %}
+<div class="section landing blue valign-wrapper center">
+    <div style="width:100%" class="valign">
+        <div class="row">
+            <div class="col s8 offset-s2">
+                <img src="https://knowyourstuff.org/assets/images/home/masthead-image.png" style="margin-right:20px;width:70%;"></img>
+                <h3 class="chunk">YOUR BELONGINGS, <span class="amber-text text-lighten-1">MADE SIMPLE.</span></h3>
+                <p class="flow-text">homecatalog is designed to help you easily keep a track of your belongings. that way, no matter what happens, you are safe. for free, and in the cloud.</p>
+
+                <div class="row">
+                        {% if user.is_authenticated %}
+                        <a class="waves-effect waves-light btn" href="{% url 'stuff_catalog' %}">go!</a>
+                        {% else %}
+                        <a class="waves-effect waves-light btn" id="featuresbtn">features</a>
+                        <a class="waves-effect waves-light btn" href="{% url 'account_login' %}">sign up</a>
+                        {% endif %}
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section features" id="features">
+    <div class="row">
+        <div class="col s10 offset-s1">
+            <div class="row">
+                <h3><strong>Hello!</strong></h3>
+
+                <p class="flow-text">This tool was designed to fill in a hole that was missing. I couldn't find a modern catalog tool for keep track of my stuff, and really like seeing my life in terms of raw data. How many shirts do I own? How long does the average pair
+                    of jeans last? There are some apps out there, but they all are either a) for osx or b) have an old and complicated ui. So I decided to write my own, as I <a href="http://www.github.com/arlyon">tend to do</a> with a lot of other holes
+                    that need filling. Why am I being boring and throwing my conversion rate out the window? Because, to be honest, I'm not looking for mass distribution. If I help someone file an insurance claim great! Since this was designed for me, it is for you for free (assuming I dont suddenly
+                    become super popular). Here are some features I value.
+                </p>
+            </div>
+            <div class="row center">
+                    <div class="col s6 center">
+                        <div class="section">
+                            <i class="material-icons large">play_circle_outline</i>
+                                <h4><strong>Ease of Use</strong></h4>
+                                <div class="col s10 offset-s1">
+                                <p class="flow-text">Things shouldn't be learned. They should just work. With this tool you can just go.</p>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="col s6 center">
+                        <div class="section">
+                            <i class="material-icons large">invert_colors</i>
+                                <h4><strong>Custom</strong></h4>
+                                <div class="col s10 offset-s1">
+                                <p class="flow-text">I like to be able to control things and store data, in this case, custom brands, categories and types.</p>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+<script>
+{% block script %}
+
+(function($) {
+    $('#featuresbtn').click(function() {
+         $('html, body').animate({
+           'scrollTop':   $('#features').offset().top
+       }, 1000);
+    });
+})(jQuery);
+
+{% endblock %}
+</script>

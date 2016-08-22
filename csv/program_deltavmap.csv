@@ -1,0 +1,24 @@
+id,name,deltav,parent_id
+1,Kerbin,0,
+2,Kerbin Orbit,3400,1
+3,Keostationary Orbit,1115,2
+4,Mun,1750,2
+5,Minmus,1440,2
+6,Kerbol Orbit,950,2
+7,Kerbol,86700,6
+8,Eeloo,3730,6
+9,Moho,5240,6
+10,Eve Orbit,500,6
+11,Gilly,500,10
+12,Eve,9330,10
+13,Duna Orbit,400,6
+14,Duna,1700,13
+15,Ike,600,13
+16,Dres,2500,6
+17,Jool Orbit,1150,6
+18,Jool,16810,17
+19,Pol,1110,17
+20,Bop,1330,17
+21,Tylo,3770,17
+22,Vall,2350,17
+23,Laythe,4800,17

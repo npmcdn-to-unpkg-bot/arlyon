@@ -1,10 +1,38 @@
+@font-face {
+  font-family: 'chunk';
+  src:  url('/static/shared/fonts/chunk.woff2') format('woff2');
+}
+
+.chunk {
+    font-family: "chunk" !important;
+    letter-spacing: 1px;
+}
+
+@font-face {
+  font-family: 'aquino';
+  src:  url('/static/shared/fonts/aquino.woff2') format('woff2');
+}
+
+.aquino {
+    font-family: "aquino" !important;
+}
+
+@font-face {
+  font-family: 'larch';
+  src:  url('/static/shared/fonts/larch.woff2') format('woff2');
+}
+
+.larch {
+    font-family: "larch" !important;
+}
+
 body {
     display: flex;
     min-height: 100vh;
     flex-direction: column;
     background-color: rgb(252, 252, 252);
-;
 }
+
 main {
     flex: 1 0 auto;
 }
@@ -25,4 +53,19 @@ footer.page-footer {
 
 .collection-header {
     margin:0px !important;
+}
+
+.landing {
+    min-height: calc(100vh - 60px);
+    color:#FFF;
+    text-shadow: 0 2px 1px rgba(0,0,0,0.4);
+}
+
+@media screen and (max-width: 992px) {
+	h3 {
+		font-size: 180% !important;
+	}
+}
+
+@media screen and (min-width: 993px) {
 }

@@ -1,0 +1,20 @@
+id,name,cost,deltav,crewcapacity,desc,shiptype_id,parts
+1,Research Truck,6375,0,1,A small truck loaded with science equipment,2,0
+3,Flea Mk1-B,10180,4400,0,"The Flea Launch System is a simple single stack non-recoverable 0.625m multi-stage rocket designed for small aerodynamic payloads.  The rocket has no control systems and relies entirely on the payload. Variation B can reach equitorial orbit and perform a transfer to the Mun or Minimus, the first stage uses liquid fuel.",1,0
+4,Flea Mk0-B,5550,4500,0,"Simple single stack non-recoverable 0.625m multi-stage rocket designed for small aerodynamic payloads. Variation B can reach equitorial orbit and perform a transfer to the Mun or Minimus, the first stage uses liquid fuel.",1,0
+5,Flea Mk1-A,6155,3700,0,Simple single stack non-recoverable 0.625m multi-stage rocket designed for small aerodynamic payloads. Variation A has two stages and can launch to any LKO.,1,0
+6,Flea Mk0-A,3645,4325,3800,Simple single stack non-recoverable 0.625m multi-stage rocket designed for small aerodynamic payloads. Variation A has two stages and can launch to any LKO.,1,0
+8,Research Truck XL,12436,0,2,"A larger truck with science equipment, 2 man cab",2,0
+9,Research Plane,12250,4500,1,A small aircraft with science experiments for short range missions,8,0
+10,Test Rig,2500,0,0,A stationary part testing platform,2,0
+11,Test Rocket,5000,1000,1,A simple rocket design for testing parts,2,0
+12,Test Rover,7500,0,0,A simple rover design for testing parts,2,0
+13,Leatherback,7500,4700,1,"Single seat manned pod with engine, fuel and science experiments, able to return from LKO using the engine bell as a heat shield.",3,0
+14,Loggerhead,24000,4220,0,"A simple multiseat pod with engine, fuel and extra food.   Useful for LKO operations carrying extra crew, rescue missions or small numbers of tourists.",3,0
+15,Commsat,14200,0,0,"Tiny sattelite with omni antennas, solar panels and batteries.",4,0
+16,Relaysat,17250,0,0,"Tiny sattelite with omni antenna and long range dishes, solar panels and batteries",4,0
+17,Scansat,22450,0,0,Small sattelite with omni antenna and scanning equipment to map the surface of the celestial body it orbits,4,0
+18,Probesat,11475,0,0,"Small sattelite with omni antenna, a single long range dish and some basic science equipment not designed for return trips",4,0
+19,Telesat,26450,0,0,Medium sattelite with telescope equipment.,4,0
+20,Munar Orbital Habitat,534256,0,24,A space station that is deigned to be a base of operation for all munar exhibitions. Also serves as a fuel depot for craft travelling further.,9,0
+21,Rocket MK1,6373,543,0,gfdsjkogl,3,0

@@ -2,12 +2,11 @@
 <!DOCTYPE html>
 
 <html>
-
 <head>
     <title>{% block head_title %}{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link rel="icon" type="image/svg" href="{% block favicon %}{% endblock %}">
-    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <link rel="stylesheet" href="{% static "shared/css/style.css" %}">
     <link rel="stylesheet" href="{% static "shared/css/materialize.css" %}">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -15,26 +14,28 @@
 
     {% block css %}{% endblock %}
     <style>{% block style %}{% endblock %}</style>
-
 </head>
 
+<body>
 <header>
     <nav>
         <div class="nav-wrapper">
             <a href="{% block logo_href %}{% endblock %}" class="brand-logo"><i class="material-icons left {% block logo_color %}{% endblock %}" style="width:60px;text-align:center;">{% block logo_icon %}{% endblock %}</i>{% block app_name %}{% endblock %}</a>
             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
+                {% block menu_links_unauth %}{% endblock %}
                 {% if user.is_authenticated %}
                 {% block menu_links %}{% endblock %}
-                <li><a href="{% url 'account_profile' %}"><i class="material-icons left">person</i>Profile</a></li>
+                <li><a href="{% url 'account_profile' %}"><i class="material-icons left">vpn_key</i>Profile</a></li>
                 {% else %}
                 <li><a href="{% url 'account_login' %}"><i class="material-icons left">vpn_key</i>Sign in</a></li>
                 {% endif %}
             </ul>
             <ul class="side-nav" id="mobile-demo">
+              {% block menu_links_unauth2 %}{% endblock %}
               {% if user.is_authenticated %}
               {% block menu_links2 %}{% endblock %}
-              <li><a href="{% url 'account_profile' %}"><i class="material-icons left">person</i>Profile</a></li>
+              <li><a href="{% url 'account_profile' %}"><i class="material-icons left">vpn_key</i>Profile</a></li>
               {% else %}
               <li><a href="{% url 'account_login' %}"><i class="material-icons left">vpn_key</i>Sign in</a></li>
               {% endif %}
@@ -44,18 +45,20 @@
     {% block nav_extra %}{% endblock %}
 </header>
 
+{% block dropdown %}{% endblock %}
+
 <main>
     {% block body %}{% endblock %}
 </main>
 
 {% include 'footer.html' %}
+</body>
 
 <script>
 $(".button-collapse").sideNav();
 {% for message in messages %}
 Materialize.toast('{{message}}', 4000)
 {% endfor %}
-
 {% block pagescript %}{% endblock %}
 
 </script>

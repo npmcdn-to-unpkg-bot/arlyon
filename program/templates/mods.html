@@ -29,7 +29,7 @@
 {% endblock %}
 
 <script>
-{% block scripts %}
+{% block pagescript %}
 document.getElementById("nav_settings").className += " nav_active";
 $("tbody tr").click(function(){
   window.location.href = $(this).find("a").attr("href");

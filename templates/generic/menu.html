@@ -2,20 +2,26 @@
 
 {% block css %}{% endblock %}
 
-{% block head_title %}Account{% endblock %}
+{% block dropdown %}
+<ul id="dropdown1" class="dropdown-content">
+  <li><a href="{% url 'flipper' %}"><i class="material-icons left">receipt</i>RuneFlip</a></li>
+  <li><a href="{% url 'stuff' %}"><i class="material-icons left">home</i>HomeCatalog</a></li>
+  <li><a href="{% url 'kml' %}"><i class="material-icons left">account_balance_wallet</i>Kerbal Mission Log</a></li>
+</ul>
+{% endblock %}
 
-{% block logo_href %}{% url "account_profile" %}{% endblock %}
-{% block logo_color %}green darken-1{% endblock %}
-{% block logo_icon %}vpn_key{% endblock %}
-{% block app_name  %}account{% endblock %}
-
-{% block menu_links %}{% block menu_links2 %}
+{% block menu_links_unauth %}{% block menu_links_unauth2 %}
 <li><a href="{% url 'flipper' %}"><i class="material-icons left">receipt</i>RuneFlip</a></li>
 <li><a href="{% url 'stuff' %}"><i class="material-icons left">home</i>HomeCatalog</a></li>
 <li><a href="{% url 'kml' %}"><i class="material-icons left">account_balance_wallet</i>Kerbal Mission Log</a></li>
+<!--<li><a class="dropdown-button" href="#!" data-activates="dropdown1">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>-->
 <li><a href="{% url 'cv' %}"><i class="material-icons left">person</i>CV</a></li>
 {% endblock %}{% endblock %}
 
 {% block nav_extra %}{% endblock %}
 {% block body %}{% endblock %}
-{% block pagescript %}{% block script %}{% endblock %}{% endblock %}
+<script>
+{% block pagescript %}
+{% block script %}{% endblock %}
+{% endblock %}
+</script>

@@ -67,11 +67,11 @@ img {
     padding-bottom: 0.5vw;
 }
 
-a:link {
+#navbar ul a:link {
     text-decoration: none;
     color: inherit;
 }
-a:visited {
+#navbar ul a:visited {
     text-decoration: none;
     color: inherit;
 }

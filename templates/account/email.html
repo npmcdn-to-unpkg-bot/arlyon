@@ -6,15 +6,6 @@
 
 {% block content %}
 
-<style>
-
-form {
-    padding:0px;
-    margin:0px;
-}
-
-</style>
-
 {% if user.emailaddress_set.all %}
     <div class="collection with-header">
         <div class="collection-header valign-wrapper"><a href="#emailmodal" class="modal-trigger valign"><i class="material-icons">info_outline</i></a><strong>{% trans 'Associated Email Addresses' %}</strong></div>

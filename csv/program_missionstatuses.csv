@@ -1,0 +1,9 @@
+id,name,description,color,grandstatus_id
+1,Planning,"An objective has been identified, may be a contract or simply something that needs to be done to acomplish some other goal.  That objective has been assigned to the program that most fits.",8bd4e3,1
+2,Construction,The vessel capable of completing the objective has been either selected or designed and the money is invested into the construction process.,d87ce6,2
+3,Cancelled,Something changed before the construction was completed and the vessel was scrapped.,ede324,1
+4,Ongoing,"The mission has been launched, but has not yet been recovered.",f3b12d,3
+5,Success,All the mission objectives were completed and the vessel was recovered without incident.,6bdf78,4
+6,Partial Success,Some of the mission objective were complete and the vessel was recovered mostly intact.,98f54d,4
+7,Failure,Either the mission was not completed or the vessel was lost.,e94b4b,4
+8,Aborted,"The mission was stopped at some point after launch, generally due to an observation of a condition that posed a serious threat to the vessel safety or mission completion.",5049de,3

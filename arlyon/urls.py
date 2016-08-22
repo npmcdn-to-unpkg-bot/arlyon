@@ -25,4 +25,5 @@ urlpatterns = [
     url(r'^flip/', include('flipper.urls')),
     url(r'^kml/', include('program.urls')),
     url(r'^profile/', views.profile, name='account_profile'),
+    url(r'^$', views.landing, name='hub'),
 ]

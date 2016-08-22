@@ -3,7 +3,7 @@
 {% block content %}
 <main>
     <div style="height:96px;margin:20px;margin-bottom:30px;">
-        <img id="titleimage" src="/static/images/big/{{item.itemid}}.gif" height="96px;" style="display:inline-block;margin-right:10px;">
+        <img id="titleimage" src="/static/flipper/images/big/{{item.itemid}}.gif" height="96px;" style="display:inline-block;margin-right:10px;">
         <div style="display:inline-block;vertical-align:top;height:96px;">
             <h4 style="margin-top:16.5px;margin-bottom:15.5px;height:36px;position:relative;"><b>{{item.name}}</b></h4>
             <div>{{item.description}}</div>
@@ -21,7 +21,7 @@
         <div class="col s10">
             <ul class="tabs">
                 <li class="tab col s3" id="table"><a class="amber-text active" href="#pricedata">Previous Flips</a></li>
-                <li class="tab col s3"><a class="amber-text" href="#pricenew">30 Flips</a></li>
+                <li class="tab col s3"><a class="amber-text" href="#pricenew">Recent Flips</a></li>
             </ul>
         </div>
         <div class="input-field col s2" style="margin:0px;">
@@ -42,7 +42,11 @@
             </table>
         </div>
         <div id="pricenew" class="col s12">
-            <h2>A NEW FLIP</h2>
+            {% if flips.count > 5 %}
+              <h2>A NEW FLIP</h2>
+            {% else %}
+              <h4 class="center">Not enough data.</h4>
+            {% endif %}
         </div>
     </div>
     <div class="row white shadow" id="pricelog" style="height:auto;">
@@ -75,8 +79,8 @@
 </main>
 {% endblock %}
 
-{% block script %}
 <script>
+{% block script %}
   $('#table').on('click', function () {
       priceTable.responsive.recalc()
   });
@@ -287,5 +291,5 @@
             ]
         });
     });
-</script>
 {% endblock %}
+</script>
