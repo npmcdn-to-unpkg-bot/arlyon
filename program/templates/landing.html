@@ -2,13 +2,13 @@
 {% load account %}
 {% load socialaccount %}
 {% block body %}
-<div class="section landing blue valign-wrapper center">
+<div class="section landing red darken-1 valign-wrapper center">
     <div style="width:100%" class="valign">
         <div class="row">
             <div class="col s8 offset-s2">
-                <img src="https://knowyourstuff.org/assets/images/home/masthead-image.png" style="margin-right:20px;width:70%;"></img>
-                <h3 class="chunk">YOUR BELONGINGS, <span class="amber-text text-lighten-1">MADE SIMPLE.</span></h3>
-                <p class="flow-text">homecatalog is designed to help you easily keep a track of your belongings. that way, no matter what happens, you are safe. for free, and in the cloud.</p>
+                <img class="section" src="/static/images/kerbal.png" style="max-width:50%;"></img>
+                <h3 class="chunk">MAKE YOUR AGENCY <span class="amber-text text-lighten-2">YOUR OWN.</span></h3>
+                <p class="flow-text"></p>
 
                 <div class="row">
                         {% if user.is_authenticated %}

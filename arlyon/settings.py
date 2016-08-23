@@ -72,6 +72,7 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'arlyon.middleware.LoginRequiredMiddleware',
 ]
 
 ROOT_URLCONF = 'arlyon.urls'
