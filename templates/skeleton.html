@@ -24,6 +24,9 @@
             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 {% block menu_links_unauth %}{% endblock %}
+                {% if user.is_superuser %}
+                {% block superuser %}{% endblock %}
+                {% endif %}
                 {% if user.is_authenticated %}
                 {% block menu_links %}{% endblock %}
                 <li><a href="{% url 'account_profile' %}"><i class="material-icons left">vpn_key</i>Profile</a></li>
@@ -33,6 +36,9 @@
             </ul>
             <ul class="side-nav" id="mobile-demo">
               {% block menu_links_unauth2 %}{% endblock %}
+              {% if user.is_superuser %}
+              {% block superuser2 %}{% endblock %}
+              {% endif %}
               {% if user.is_authenticated %}
               {% block menu_links2 %}{% endblock %}
               <li><a href="{% url 'account_profile' %}"><i class="material-icons left">vpn_key</i>Profile</a></li>

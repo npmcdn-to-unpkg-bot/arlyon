@@ -18,6 +18,10 @@
 <li><a href="{% url 'cv' %}"><i class="material-icons left">person</i>CV</a></li>
 {% endblock %}{% endblock %}
 
+{% block superuser %}{% block superuser2 %}
+<li><a href="{% url 'wiki:root' %}"><i class="material-icons left">assignment</i>Wiki</a></li>
+{% endblock %}{% endblock %}
+
 {% block nav_extra %}{% endblock %}
 {% block body %}{% endblock %}
 <script>

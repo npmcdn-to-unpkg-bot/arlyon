@@ -1,0 +1,80 @@
+h1 {
+  text-align:center;
+}
+
+h2 {
+  padding-bottom: 5px !important;
+}
+
+h5 {
+  font-family: Inconsolata;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+h6 {
+  color:#999;
+  text-align:center;
+  margin-top: 60px;
+  margin-bottom: 60px;
+  font-family: Inconsolata;
+}
+
+h6:before {
+  content: open-quote !important;
+}
+h6:after {
+  content: close-quote !important;
+}
+
+p {
+  font-family: Open Sans;
+}
+
+.wiki-article div.toc {
+  float:left;
+  padding-right:20px;
+  padding-bottom:10px;
+}
+.wiki-article div.toc>ul {
+  padding:10px;
+}
+
+li>p>strong {
+  font-family: Inconsolata;
+  text-transform: uppercase;
+}
+
+ul {
+  list-style: none;
+}
+
+.input-field {
+    height:100%;
+}
+
+form {
+    height:100%;
+}
+
+nav>div.nav-wrapper {
+    font-family: Roboto;
+}
+
+nav>div.nav-wrapper>a:hover {
+    color:#FFF;
+    text-decoration: none;
+}
+
+nav>div.nav-wrapper>ul>li>a:hover {
+    color:#FFF;
+    text-decoration: none;
+}
+
+html {
+    font-size: 14px;
+}
+
+nav {
+    box-shadow: 0 2px 5px 0 transparent !important;
+}

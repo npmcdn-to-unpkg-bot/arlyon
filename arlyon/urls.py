@@ -13,6 +13,10 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
+
+from wiki.urls import get_pattern as get_wiki_pattern
+from django_nyt.urls import get_pattern as get_nyt_pattern
+
 from django.conf.urls import url, include
 from django.contrib import admin
 from . import views
@@ -26,4 +30,9 @@ urlpatterns = [
     url(r'^kml/', include('program.urls')),
     url(r'^profile/', views.profile, name='account_profile'),
     url(r'^$', views.landing, name='hub'),
+]
+
+urlpatterns += [
+    url(r'^wiki/notifications/', get_nyt_pattern()),
+    url(r'^wiki/', get_wiki_pattern())
 ]
