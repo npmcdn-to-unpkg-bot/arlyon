@@ -1,27 +1,42 @@
-{% extends "flipper/menu.html" %}
+{% extends "flipper/menu.html" %}{% load staticfiles %}
 
 {% block content %}
 <main>
-    <div style="height:96px;margin:20px;margin-bottom:30px;">
-        <img id="titleimage" src="/static/flipper/images/big/{{item.itemid}}.gif" height="96px;" style="display:inline-block;margin-right:10px;">
-        <div style="display:inline-block;vertical-align:top;height:96px;">
-            <h4 style="margin-top:16.5px;margin-bottom:15.5px;height:36px;position:relative;"><b>{{item.name}}</b></h4>
-            <div>{{item.description}}</div>
+    <div class="row section">
+        <div class="col s12 m12 l6">
+            <div class="card horizontal">
+                <div class="card-image valign-wrapper">
+                    <img id="card-icon" class="valign hide-on-small-only" src="{% static 'flipper/images/big/' %}{{item.itemid}}.gif">
+                </div>
+                <div class="card-stacked">
+                    <div class="card-content" id="itemcard">
+                        <div class="row nopadding valign-wrapper">
+                            <div class="col s8 valign">
+                                <h4 class="nopadding"><b>{{item.name}}</b></h4>
+                                <div>{{item.description}}</div>
+                            </div>
+                            <div class="col s4">
+                                <div>
+                                    <div><b>Buy Limit: {{item.buylimit}}</b></div>
+                                    <div>High Alch: <span class="gpify">{{item.highalch}}</span></div>
+                                    <div><b>ID: {{item.itemid}}</b></div>
+                                    <div>Members: {{item.members}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div id="extra" style="display:inline-block;vertical-align:top;height:96px;padding-left:20px">
-            <div style="margin-top:16.5px;margin-bottom:15.5px;height:36px;position:relative;"><b style="position:absolute;bottom:0;">ID: {{item.itemid}}</b></div>
-            <div>Members: {{item.members}}</div>
-        </div>
-        <div id="extra2" style="display:inline-block;vertical-align:top;height:96px;padding-left:20px">
-            <div style="margin-top:16.5px;margin-bottom:15.5px;height:36px;position:relative;"><b style="position:absolute;bottom:0;">Buy Limit: {{item.buylimit}}</b></div>
-            <div>High Alch: <span class="gpify">{{item.highalch}}</span></div>
+        <div class="col s12 m12 l6">
+            <h1>additional info</h1>
         </div>
     </div>
     <div class="row white shadow" id="fliplog">
         <div class="col s10">
             <ul class="tabs">
-                <li class="tab col s3" id="table"><a class="amber-text active" href="#pricedata">Previous Flips</a></li>
-                <li class="tab col s3"><a class="amber-text" href="#pricenew">Recent Flips</a></li>
+                <li class="tab col s3" id="table"><a class="amber-text active" href="#pricedata">Completed Flips</a></li>
+                <li class="tab col s3"><a class="amber-text" href="#pricenew">Flips Graph</a></li>
             </ul>
         </div>
         <div class="input-field col s2" style="margin:0px;">
@@ -53,11 +68,11 @@
         <div class="col s10">
             <ul class="tabs">
                 <li class="tab col s3" id="table"><a class="amber-text active" href="#test1">Price Data</a></li>
-                <li class="tab col s3" id="graph"><a class="amber-text" href="#test2">30 Days</a></li>
+                <li class="tab col s3" id="graph"><a class="amber-text" href="#test2">30 Days Graph</a></li>
             </ul>
         </div>
         <div class="input-field col s2" style="margin:0px;">
-            <button class="btn waves-effect waves-light" type="submit" style="width:100%" name="action">Log New Price</button>
+            <button class="btn waves-effect waves-light" type="submit" style="width:100%" name="action" id="newprice">Log New Price</button>
         </div>
         <div id="test1" class="col s12">
             <table id="pricetable" style="width:100%">
@@ -89,36 +104,83 @@
       window.dispatchEvent(new Event('resize'));
   }, 0);
   });
-  $('#newflip').on('click', function () {
-      swal({
-    title: 'How many?',
-    text: 'Please enter the number of {{item.name}}s you are buying.',
-    showCancelButton: true,
-    confirmButtonText: 'Continue',
-    cancelButtonText: 'Cancel',
-    reverseButtons:true,
-    input:'text'
-  }).then(function(isConfirm) {
-    if (isConfirm === true) {
-      swal(
-        'Deleted!',
-        'Your imaginary file has been deleted.',
-        'success'
-      );
 
-    } else if (isConfirm === false) {
-      swal(
-        'Cancelled',
-        'Your imaginary file is safe :)',
-        'error'
-      );
+$('#newflip').on('click', function () {
+ vex.dialog.open({
+     message: 'Log a new flip.',
+     input: [
+         '<div class="vex-custom-field-wrapper">',
+             '<label for="buyprice">Price</label>',
+             '<div class="vex-custom-input-wrapper">',
+                 '<input name="buyprice" type="number" value="0" />',
+             '</div>',
+         '</div>',
+         '<div class="vex-custom-field-wrapper">',
+             '<label for="buyvolume">Volume</label>',
+             '<div class="vex-custom-input-wrapper">',
+                 '<input name="buyvolume" type="number" value="0" />',
+             '</div>',
+         '</div>',
+     ].join(''),
+     callback: function (data) {
+         if (!data) {
+             return console.log('Cancelled')
+         }
+         if (data.buyprice == 0 || data.buyvolume == 0) {
+             Materialize.toast(`You can't buy 0 items or pay 0gp.`, 4000)
+         }
+         else {
+            $.ajax({
+                url: "newflip",
+                type:"GET",
+                data: {buyvolume:data.buyvolume,buyprice:data.buyprice}
+            });
+            buyprice = gpify(data.buyprice)
+            Materialize.toast(`Flip logged in dashboard: Buying ${data.buyvolume} at ${buyprice}gp.`, 4000)
+         }
+     }
+ })
+ });
+$('#newprice').on('click', function () {
+ vex.dialog.open({
+     message: 'Log the current price data.',
+     input: [
+         '<div class="vex-custom-field-wrapper">',
+             '<label for="buyingprice">Buying Price</label>',
+             '<div class="vex-custom-input-wrapper">',
+                 '<input name="buyingprice" type="number" value="0" />',
+             '</div>',
+         '</div>',
+         '<div class="vex-custom-field-wrapper">',
+             '<label for="sellingprice">Selling Price</label>',
+             '<div class="vex-custom-input-wrapper">',
+                 '<input name="sellingprice" type="number" value="0" />',
+             '</div>',
+         '</div>',
+     ].join(''),
+     callback: function (data) {
+         if (!data) {
+             return console.log('Cancelled')
+         }
+         if (data.buyingprice == 0 || data.sellingprice == 0) {
+             Materialize.toast(`You can't buy or sell for 0gp.`, 4000)
+         }
+         else {
+            buyingprice = gpify(data.buyingprice, 1)
+            sellingprice = gpify(data.sellingprice, 1)
+            console.log('Date', data.buyprice, 'Color', data.buyvolume)
+            $.ajax({
+                url: "newprice",
+                type:"GET",
+                data: {buyingprice:data.buyingprice,sellingprice:data.sellingprice}
+            });
+            Materialize.toast(`GE Data Saves: Buying: ${buyingprice} Selling: ${sellingprice}.`, 4000)
+            priceTable.ajax.reload();
+         }
+     }
+ })
+ });
 
-    } else {
-      // Esc, close button or outside click
-      // isConfirm is undefined
-    }
-  });
-  });
 </script>
 <script>
     $(document).ready(function() {
@@ -129,7 +191,7 @@
                 $(".page-footer").css("visibility","visible");
             },
             "sDom": '<"top">tip',
-            "order": [[ 0, "desc" ]],
+            "order": [[ 5, "desc" ]],
             responsive: true,
             ajax: {
                 url: 'flips/json',

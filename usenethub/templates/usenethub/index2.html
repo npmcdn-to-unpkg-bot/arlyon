@@ -1,0 +1,46 @@
+{% extends 'usenethub/menu.html' %}
+
+{% block style %}
+
+#frame {
+	width:100%;
+	height:500px;
+}
+
+#collection-content {
+    padding:0px;
+}
+
+{% endblock %}
+
+
+{% block body %}
+
+
+
+<div class="row section">
+    <div class="col s12 l6">
+        <ul class="collection with-header">
+            <li class="collection-header"><h4>sabnzbd</h4></li>
+            <li id="collection-content" class="collection-item"><embed id="frame" src="http://annepc:8080/" frameBorder='0'></embed></li>
+        </ul>
+    </div>
+    <div class="col s12 l6">
+        <ul class="collection with-header">
+            <li class="collection-header"><h4>babemobile</h4></li>
+            <li id="collection-content" class="collection-item"><embed id="frame" src="https://docs.google.com/spreadsheets/d/1apcS7SYDzeikR7auOrACNFgFB9dKgl_IbMdbAHxvBFA/edit?usp=sharing&widget=true&rm=demo" frameBorder='0'></embed></li>
+        </ul>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col s12">
+        <ul class="collection">
+            <li><a href="http://annepc:8989" class="collection-item">Sonarr</a></li>
+            <li><a href="http://annepc:5050" class="collection-item">Couchpotato</a></li>
+            <li><a href="http://annepc:32400/web" class="collection-item">PLEX</a></li>
+        </ul>
+    </div>
+</div>
+
+{% endblock %}

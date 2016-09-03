@@ -35,6 +35,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
 
     'program.apps.ProgramConfig',
+    'usenethub.apps.UsenethubConfig',
     'cv.apps.CvConfig',
     'website.apps.WebsiteConfig',
     'flipper.apps.FlipperConfig',

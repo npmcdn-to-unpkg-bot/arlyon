@@ -10,12 +10,6 @@ def landing(request):
     }
     return HttpResponse(template.render(context, request))
 
-def contact(request):
-    template = loader.get_template('catalog/contact.html')
-    context = {
-    }
-    return HttpResponse(template.render(context, request))
-
 def rooms(request):
     if request.user.is_authenticated():
         template = loader.get_template('catalog/rooms.html')

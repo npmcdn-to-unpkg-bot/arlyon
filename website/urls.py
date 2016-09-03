@@ -8,5 +8,4 @@ urlpatterns = [
     url(r'^$', views.landing, name='stuff'),
     url(r'^catalog/', views.catalog, name='stuff_catalog'),
     url(r'^rooms/', views.rooms, name='stuff_rooms'),
-    url(r'^contact/', views.contact, name='stuff_contact'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -15,7 +15,11 @@
 <li><a href="{% url 'stuff' %}"><i class="material-icons left">home</i>HomeCatalog</a></li>
 <li><a href="{% url 'kml' %}"><i class="material-icons left">account_balance_wallet</i>Kerbal Mission Log</a></li>
 <!--<li><a class="dropdown-button" href="#!" data-activates="dropdown1">Dropdown<i class="material-icons right">arrow_drop_down</i></a></li>-->
+{% if is_family %}
+<li><a href="{% url 'usenet' %}"><i class="material-icons left">file_download</i>Usenet</a></li>
+{% else %}
 <li><a href="{% url 'cv' %}"><i class="material-icons left">person</i>CV</a></li>
+{% endif %}
 {% endblock %}{% endblock %}
 
 {% block superuser %}{% block superuser2 %}

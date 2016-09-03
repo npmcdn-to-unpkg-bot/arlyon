@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="{% static "shared/css/style.css" %}">
     <link rel="stylesheet" href="{% static "shared/css/materialize.css" %}">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
 
     {% block css %}{% endblock %}
     <style>{% block style %}{% endblock %}</style>
@@ -31,6 +31,7 @@
                 {% block menu_links %}{% endblock %}
                 <li><a href="{% url 'account_profile' %}"><i class="material-icons left">vpn_key</i>Profile</a></li>
                 {% else %}
+                {% block menu_links_unauth_only %}{% endblock %}
                 <li><a href="{% url 'account_login' %}"><i class="material-icons left">vpn_key</i>Sign in</a></li>
                 {% endif %}
             </ul>
@@ -43,6 +44,7 @@
               {% block menu_links2 %}{% endblock %}
               <li><a href="{% url 'account_profile' %}"><i class="material-icons left">vpn_key</i>Profile</a></li>
               {% else %}
+              {% block menu_links_unauth_only2 %}{% endblock %}
               <li><a href="{% url 'account_login' %}"><i class="material-icons left">vpn_key</i>Sign in</a></li>
               {% endif %}
             </ul>
@@ -63,7 +65,7 @@
 <script>
 $(".button-collapse").sideNav();
 {% for message in messages %}
-Materialize.toast('{{message}}', 4000)
+Materialize.toast('{{message}}', 4000, 'message-{{message.tags}}')
 {% endfor %}
 {% block pagescript %}{% endblock %}
 </script>

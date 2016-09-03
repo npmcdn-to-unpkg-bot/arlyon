@@ -1,45 +1,29 @@
-{% extends 'flipper/menu.html' %}
+{% extends 'flipper/menu.html' %}{% load staticfiles %}
 
 {% block content %}
-  <div id="dashinfo">
-      <ul id="trade" >
-          <li class="tooltipped" data-position="top" data-delay="50" data-tooltip="Total Profit"><i class="material-icons left">arrow_upward</i><span class="gpify">{{ profit }}</span></li>
-          <li><span>|</span></li>
-          <li class="tooltipped" data-position="top" data-delay="50" data-tooltip="# of Flips"><i class="material-icons left">cached</i><span>{{flipnumber}}</span></li>
-          <li><span>|</span></li>
-          <li class="tooltipped" data-position="top" data-delay="50" data-tooltip="Avg Return"><i class="material-icons left">trending_up</i><span>{{averageroi}}%</span></li>
-      </ul>
-      <ul id="sort">
-          <li class="grey filter btn" data-filter="all">All</li>
-          <li class="blue filter btn" data-filter=".category-1">Orders</li>
-          <li class="green filter btn" data-filter=".category-2">Bank</li>
-          <li class="orange filter btn" data-filter=".category-3">Sales</li>
-      </ul>
-  </div>
+<div id="dashinfo">
+    <ul id="trade">
+        <li class="tooltipped" data-position="top" data-delay="50" data-tooltip="Total Profit"><i class="material-icons left">arrow_upward</i><span class="gpify">{{ profit }}</span></li>
+        <li><span>|</span></li>
+        <li class="tooltipped" data-position="top" data-delay="50" data-tooltip="# of Flips"><i class="material-icons left">cached</i><span>{{flipnumber}}</span></li>
+        <li><span>|</span></li>
+        <li class="tooltipped" data-position="top" data-delay="50" data-tooltip="Avg Return"><i class="material-icons left">trending_up</i><span>{{averageroi}}%</span></li>
+    </ul>
+</div>
 
-  <main style="text-align:center">
-      <div id="itemsort">
-          {% for item in flips %}
-              <div class="status-{{item.flipstatus}} mix category-{{item.flipstatus}}">
-                  <div class="card">
-                      <div class="card-image">
-                          <img class="activator large" src="/static/flipper/images/big/{{item.item.itemid}}.gif">
-                      </div>
-                      <div class="card-content">
-                          <span class="card-title activator grey-text text-darken-4">{{item.number}}</span>
-                          <p><a href="items/{{item.item.itemid}}">{{item.item.name}}</a></p>
-                      </div>
-                      <div class="card-reveal">
-                          <span class="card-title grey-text text-darken-4">{{item.item.name}}</span>
-                          <p>Quantity: {{item.number}}<br> Total: {% widthratio item.number 1 item.buyprice %}gp <br> Bought: <br><time class="timeago" datetime="{{ item.purchasedate|date:"c" }}"></time></p>
-                          <a class="waves-effect waves-light btn wide sell">sell</a>
-                      </div>
-                  </div>
-              </div>
-          {% endfor %}
-      </div>
-  </main>
+<div id="app"></div>
+
+<script type="text/babel" src="{% static 'flipper/js/dashboard.js' %}"></script>
+
+{% for item in flips %}
+
+
+
+{% endfor %}
+
 {% endblock %}
+
+{% block scripttype %}type = "text/babel"{% endblock %}
 
 <script>
 {% block script %}
@@ -50,8 +34,6 @@ $(document).ready(function() {
     $('#itemsort').mixItUp();
     $('.gpify').each(numbercrunch)
 });
-var itemsort = document.getElementById("itemsort");
-Sortable.create(itemsort, { group: "omega" });
 
 {% endblock %}
 </script>

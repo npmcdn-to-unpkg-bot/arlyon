@@ -1,60 +1,75 @@
-{% extends "flipper/menu.html" %}
+{% extends "flipper/menu.html" %}{% load staticfiles %}
 
   <script>
 {% block script %}
 
-      $(document).ready(function() {
-          itemsTable = $("#itemslist").DataTable({
-              "pagingType": "full_numbers",
-              "initComplete": function(settings, json) {
-                  $(".page-footer").css("visibility","visible");
+    $.getJSON('{% url "flipper_items_json" %}', function(flipsjson) {
+        flips = flipsjson;
+    });
+
+    $(document).ready(function() {
+        itemsTable = $("#itemslist").DataTable({
+            "pagingType": "full_numbers",
+            "initComplete": function(settings, json) {
+              $(".page-footer").css("visibility","visible");
+            },
+            "sDom": '<"top">tip',
+            "order": [[ 4, "desc" ]],
+            responsive: true,
+            ajax: {
+                url: '{% static "flipper/items.json" %}',
+                "dataSrc": function (items) {
+                    var return_data = new Array();
+                    for(var i=0;i< flips.length; i++){
+                        if (items[flips[i]['item']-1]['profit'] == undefined) {
+                            items[flips[i]['item']-1]['profit'] = (flips[i]['sellprice']-flips[i]['buyprice'])*flips[i]['number']
+                        }
+                        else {
+                            items[flips[i]['item']-1]['profit'] += (flips[i]['sellprice']-flips[i]['buyprice'])*flips[i]['number']
+                        }
+                    }
+                    return items;
+                }
+            },
+            columns: [
+              {   data: '',
+                  "render": function ( data ) {
+                      return '<img class="imgicon" style="width:36px;height:36px;" src="">';
+                  },
               },
-              "sDom": '<"top">tip',
-              "order": [[ 4, "desc" ]],
-              responsive: true,
-              ajax: {
-                  url: '{% url "flipper_items_json" %}',
-                  dataSrc:'',
+              {   data: 'name',
+                  "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
+                      $(nTd).html("<a href='"+oData.itemid+"'>"+oData.name+"</a>" )}
               },
-              columns: [
-                  {   data: '',
-                      "render": function ( data ) {
-                          return '<img class="imgicon" style="width:36px;height:36px;" src="">';
-                      },
+              {   data: 'itemid' },
+              {   data: 'members',
+                  "render": function ( data ) {
+                      if(data == 'False') {return 'No'}
+                      else {return 'Yes'}
                   },
-                  {   data: 'name',
-                      "fnCreatedCell": function (nTd, sData, oData, iRow, iCol) {
-                          $(nTd).html("<a href='"+oData.itemid+"'>"+oData.name+"</a>" )}
+              },
+              {   data: 'profit',
+                  "defaultContent": "0",
+                  "render": function ( data, type ) {
+                      if(type == "display") {
+                          return gpify(data);
+                      }
+                      return data
                   },
-                  {   data: 'itemid' },
-                  {   data: 'members',
-                      "render": function ( data ) {
-                          if(data == 'False') {return 'No'}
-                          else {return 'Yes'}
-                      },
-                  },
-                  {   data: 'profit',
-                      defaultContent: "",
-                      "render": function ( data, type ) {
-                          if(type == "display") {
-                              return gpify(data);
-                          }
-                          return data
-                      },
-                  },
-              ],
-              "fnRowCallback": function (nRow, aData, iDisplayIndex) {
-                  $(nRow).each(function(entry) {
-                      image = this.childNodes[0].childNodes[0]
-                      image.setAttribute("src", '/static/flipper/images/big/'+aData['itemid']+'.gif')
-                  });
-              }
-          });
-          $('#searchbar').keyup(function() {
-              itemsTable.search($(this).val()).draw() ;
-          });
-      });
-      $("#items").addClass("active");
+              },
+            ],
+            "fnRowCallback": function (nRow, aData, iDisplayIndex) {
+              $(nRow).each(function(entry) {
+                  image = this.childNodes[0].childNodes[0]
+                  image.setAttribute("src", '/static/flipper/images/big/'+aData['itemid']+'.gif')
+              });
+            }
+        });
+        $('#searchbar').keyup(function() {
+            itemsTable.search($(this).val()).draw() ;
+        });
+    });
+    $("#items").addClass("active");
 
 {% endblock %}
   </script>

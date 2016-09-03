@@ -93,45 +93,79 @@
                     </p>
                 </div>
                 <div class="card-action blue">
-                    <a class="white-text" href="#">start cataloging</a>
+                    <a class="white-text" href="{% url 'stuff' %}">start cataloging</a>
                 </div>
             </div>
-          </div>
+        </div>
     </div>
 </div>
 
-<h1 class="center chunk navpoint" id="about">this is me.</h1>
+<h1 class="center chunk navpoint" id="about">what is this for?</h1>
 
-<div class="row">
+<div class="row section">
     <div class="col s10 offset-s1">
         <div class="row">
-            <h3><strong>Hello!</strong></h3>
-
-            <p class="flow-text">This tool was designed to fill in a hole that was missing. I couldn't find a modern catalog tool for keep track of my stuff, and really like seeing my life in terms of raw data. How many shirts do I own? How long does the average pair
-                of jeans last? There are some apps out there, but they all are either a) for osx or b) have an old and complicated ui. So I decided to write my own, as I <a href="http://www.github.com/arlyon">tend to do</a> with a lot of other holes
-                that need filling. Why am I being boring and throwing my conversion rate out the window? Because, to be honest, I'm not looking for mass distribution. If I help someone file an insurance claim great! Since this was designed for me, it is for you for free (assuming I dont suddenly
-                become super popular). Here are some features I value.
+            <p class="flow-text">This site was built to fill in a few holes that were missing for me. I couldn't find a modern catalog tool for keep track of my stuff, and really like seeing my life in terms of raw data. How many shirts do I own? How long does the average pair
+                of jeans last? There are some apps out there, but they all are either a) ugly or b) expensive. So I decided to write my own. To be honest, I'm not looking for mass distribution. This is my playground. If I help someone file an insurance claim great! Since this was designed for me, you
+                can have it for free. So share it around, and as long as it's not too popular, I'll be able to host it myself. Here are some features I value in my apps:
             </p>
         </div>
         <div class="row center">
-                <div class="col s6 center">
-                    <div class="section">
-                        <i class="material-icons large">play_circle_outline</i>
-                            <h4><strong>Ease of Use</strong></h4>
-                            <div class="col s10 offset-s1">
-                            <p class="flow-text">Things shouldn't be learned. They should just work. With this tool you can just go.</p>
-                    </div>
+            <div class="col s4 center">
+                <div class="section">
+                    <i class="material-icons large">play_circle_outline</i>
+                        <h4><strong>Ease of Use</strong></h4>
+                        <div class="col s10 offset-s1">
+                        <p class="flow-text">I don't want a complicated learning curve to get things to work. They just do.</p>
+                        </div>
+                </div>
+            </div>
+            <div class="col s4 center">
+                <div class="section">
+                    <i class="material-icons large">invert_colors</i>
+                    <h4><strong>User Control</strong></h4>
+                    <div class="col s10 offset-s1">
+                        <p class="flow-text">I like to be able to control things and have a flexible framework that bends and moulds to my needs.</p>
                     </div>
                 </div>
-                <div class="col s6 center">
-                    <div class="section">
-                        <i class="material-icons large">invert_colors</i>
-                            <h4><strong>Custom</strong></h4>
-                            <div class="col s10 offset-s1">
-                            <p class="flow-text">I like to be able to control things and store data, in this case, custom brands, categories and types.</p>
-                    </div>
+            </div>
+            <div class="col s4 center">
+                <div class="section">
+                    <i class="material-icons large">phone_iphone</i>
+                    <h4><strong>Clean Design</strong></h4>
+                    <div class="col s10 offset-s1">
+                        <p class="flow-text">A uniform theme and shared design mindset means you always know where to look.</p>
                     </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section">
+    <div class="row">
+        <div class="col s10 offset-s1">
+            <h1 class="chunk center">contact me!</h1>
+
+            <p class="flow-text">Have any suggestions? Let me know. I mainly use this tool for myself, but you are free to use it as much as you like for absolutely nothing.
+                I enjoy making small tools like this in my free time (maybe I'll package them together one day but everyone who makes an account now will get free use forever).
+                If you do use my tools, then consider buying me a beer and forever be immortalized in the hall of fame.</p>
+        </div>
+    </div>
+</div>
+
+<div class="section">
+    <div class="row">
+        <div class="col s10 offset-s1">
+            <div class="col s6 center">
+                <i class="material-icons large">email</i>
+                <h4><strong>You can email me.</strong></h4>
+                <p class="flow-text">I'll write back. <a href="mailto:arlyon@me.com">arlyon@me.com</a></p>
+            </div>
+            <div class="col s6 center">
+                <i class="material-icons large">receipt</i>
+                <h4><strong>Hungry student</strong></h4>
+                <p class="flow-text">Looking for work! <a href="{% url 'cv' %}">cv</a></p>
             </div>
         </div>
     </div>

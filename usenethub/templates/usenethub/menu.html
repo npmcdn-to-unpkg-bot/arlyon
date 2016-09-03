@@ -1,0 +1,27 @@
+{% extends "skeleton.html" %}{% load staticfiles %}
+
+{% block css %}
+
+<link rel="stylesheet" href="{% static "catalog/style.css" %}">
+<link href="{% static "shared/css/hover.css" %}" rel="stylesheet">
+
+{% endblock %}
+
+{% block head_title %}Usenet Hub{% endblock %}
+
+
+{% block logo_href %}{% url "usenet" %}{% endblock %}
+{% block logo_color %}brown darken-2{% endblock %}
+{% block logo_icon %}file_download{% endblock %}
+{% block app_name  %}Usenet Hub{% endblock %}
+
+{% block menu_links %}{% block menu_links2 %}
+{% endblock %}{% endblock %}
+
+{% block menu_links_unauth_only %}{% block menu_links_unauth_only2 %}
+<li id="items"><a href="{% url 'hub' %}"><i class="material-icons right">home</i>Home</a></li>
+{% endblock %}{% endblock %}
+
+{% block nav_extra %}{% endblock %}
+{% block body %}{% endblock %}
+{% block pagescript %}{% endblock %}

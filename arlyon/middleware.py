@@ -2,9 +2,8 @@ from django.http import HttpResponseRedirect
 from django.conf import settings
 from re import compile
 
-EXEMPT_URLS = [compile(settings.LOGIN_URL.lstrip('/')), compile(''), compile('kml'), compile('flip'), compile('stuff'), compile('cv'), compile('accounts/login')]
+EXEMPT_URLS = [compile(settings.LOGIN_URL.lstrip('/')), compile(''), compile('kml'), compile('flip'), compile('stuff'), compile('cv')]
 
-print(EXEMPT_URLS)
 
 class LoginRequiredMiddleware:
     """
@@ -25,6 +24,5 @@ class LoginRequiredMiddleware:
  'django.core.context_processors.auth'."
         if not request.user.is_authenticated():
             path = request.path_info.lstrip('/')
-            print(path)
-            if not any(m.match(path) for m in EXEMPT_URLS):
+            if path == 'wiki/' and not request.user.is_superuser:
                 return HttpResponseRedirect(settings.LOGIN_URL)

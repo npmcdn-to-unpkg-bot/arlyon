@@ -34,6 +34,10 @@
 <li><a href="{% url 'kml_agency' %}"><i class="material-icons left">insert_chart</i>Agency Info</a></li>
 {% endblock %}{% endblock %}
 
+{% block menu_links_unauth_only %}{% block menu_links_unauth_only2 %}
+<li id="items"><a href="{% url 'hub' %}"><i class="material-icons right">home</i>Home</a></li>
+{% endblock %}{% endblock %}
+
 {% block nav_extra %}{% endblock %}
 
 {% block body %}

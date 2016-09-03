@@ -14,10 +14,7 @@
 {% block head_title %}Alexander Lyon{% endblock %}
 
 {% block menu_links_unauth %}{% block menu_links_unauth2 %}
-<li><a href="{% url 'flipper' %}"><i class="material-icons left">receipt</i>RuneFlip</a></li>
-<li><a href="{% url 'stuff' %}"><i class="material-icons left">home</i>HomeCatalog</a></li>
-<li><a href="{% url 'kml' %}"><i class="material-icons left">account_balance_wallet</i>Kerbal Mission Log</a></li>
-<li><a href="{% url 'cv' %}"><i class="material-icons left">person</i>CV</a></li>
+<li id="items"><a href="{% url 'hub' %}"><i class="material-icons right">home</i>Home</a></li>
 {% endblock %}{% endblock %}
 
 {% block body %}
@@ -35,11 +32,7 @@
 					</div>
 					<div class="collection-item">
 						<div class="col s12 l4 center printnone">
-							<div class="valign-wrapper">
-								<div class="valign">
-									<img class="circle" style="max-height:350px;max-width:350px;width:90%;margin-top:8px;" src="https://graph.facebook.com/v2.4/10206420201890491/picture?type=square&height=600&width=600&return_ssl_resources=1">
-								</div>
-							</div>
+							<img class="circle center" style="max-height:350px;max-width:350px;width:90%;margin-top:8px;" src="https://graph.facebook.com/v2.4/10206420201890491/picture?type=square&height=600&width=600&return_ssl_resources=1">
 						</div>
 						<div class="col s12 m6 l8 print50">
 							<ul class="collection">
@@ -51,7 +44,7 @@
 								</li>
 								<li class="collection-item avatar">
 									<i class="material-icons circle green">phone</i>
-									<span class="title">{% trans 'Phone' %}</span>
+									<span class="title">{% trans '+47 94152244' %}</span>
 									<label>
 										<br>phone</label>
 								</li>
@@ -61,7 +54,7 @@
 							<ul class="collection">
 								<li class="collection-item avatar">
 									<i class="material-icons circle blue">home</i>
-									<span class="title">{% trans 'Address' %}</span>
+									<span class="title">{% trans '' %}</span>
 									<label>
 										<br>address</label>
 								</li>
@@ -96,9 +89,9 @@
 						<h3 class="white-text"><strong>{% trans 'Personal Info' %}</strong></h3>
 					</div>
 					<div class="collection-item">
-						<p class="flow-text">{% trans "I am a student and the University of Stavanger undertaking a year study of maths. Last year I ran a small tech support business, and spent the rest of my gap year working and travelling in New Zealand where I learned a wide variety of
+						<p class="flow-text">I am a student and the University of Stavanger undertaking a year study of maths. Last year I ran a small tech support business, and spent the rest of my gap year working and travelling in New Zealand where I learned a wide variety of
 							skills. I have also taken part in many extracurriculars at school such as president of the Student Council, and running a sports tournament for a school founded charity. Outside of school, I have worked in a children's club managing games and activities
-							and coached a under-8s football team. I am fascinated with the world around me and like to be engaged. I actively seek to be a valued part of a team, and feel that I can complement any dynamic with my skills." %}</p>
+							and coached a under-8s football team. I am fascinated with the world around me and like to be engaged. I actively seek to be a valued part of a team, and feel that I can complement any dynamic with my skills.</p>
 					</div>
 				</div>
 			</div>

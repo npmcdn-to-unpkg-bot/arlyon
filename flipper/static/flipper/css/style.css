@@ -9,34 +9,33 @@ img.imgicon {
 td a:hover {
   color: rgba(20, 179, 222, 0.87); }
 
-table .dataTable th:active {
-  outline: none; }
-
 thead {
   font-weight: bold; }
 
-body {
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column; }
+div .card-reveal .row {
+  padding: 3px; }
+
+#cardbtn {
+  height: 100%; }
+
+#itemcard {
+  padding-left: 0px;
+  padding-right: 0px; }
 
 #searchbar {
-  margin: 0px; }
+  margin: 0px;
+  height: 64px; }
 
 #dashinfo {
   text-align: center;
-  padding: 1.2vmax;
-  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.16);
   width: 100%; }
   #dashinfo #trade li {
-    height: inherit;
     display: inline-block;
     font-weight: bold;
-    text-shadow: 0px 2px rgba(0, 0, 0, 0.1); }
+    text-shadow: 0px 2px rgba(0, 0, 0, 0.1);
+    font-size: 36px;
+    line-height: inherit; }
     #dashinfo #trade li i {
-      font-size: 36px;
-      line-height: inherit; }
-    #dashinfo #trade li span {
       font-size: 36px;
       line-height: inherit; }
   #dashinfo #trade .tooltipped {
@@ -44,66 +43,12 @@ body {
     margin-right: 0.5vw;
     margin-left: 0.5vw; }
 
-.card {
-  display: inline-block;
-  margin-right: 15px;
-  min-width: 180px;
-  margin: 10px !important;
-  min-height: 290px; }
-  .card::-webkit-scrollbar {
-    display: none !important; }
-
-#itemsort {
-  width: auto;
-  vertical-align: top; }
-  #itemsort .mix {
-    display: none; }
-  #itemsort .status-1,
-  #itemsort .status-2,
-  #itemsort .status-3 {
-    border-radius: 3px;
-    min-width: 200px;
-    min-height: 310px; }
-  #itemsort .status-1 {
-    background-color: #2196F3;
-    vertical-align: top; }
-  #itemsort .status-2 {
-    background-color: #4CAF50;
-    vertical-align: top; }
-  #itemsort .status-3 {
-    background-color: #ff9800;
-    vertical-align: top; }
-
-.wide {
-  width: 83% !important;
-  position: absolute;
-  bottom: 15px;
-  left: 15px; }
-
-.cardreveal p {
-  height: 150px;
-  overflow-y: scroll; }
-
-.row {
-  margin: none !important;
-  padding: 10px;
-  padding-left: 15px; }
-
 .nopadding {
-  padding: 0px; }
-
-.nav-wrapper {
-  overflow-x: hidden; }
+  padding: 0px !important;
+  margin: 0px !important; }
 
 .tabs .indicator {
   background-color: #ffc107; }
-
-#toast-container div {
-  opacity: 1;
-  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.4) !important; }
-
-.toast-success {
-  background-color: #43a047; }
 
 [tabindex] {
   outline: none !important; }

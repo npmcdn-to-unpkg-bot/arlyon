@@ -1,5 +1,4 @@
 from django.conf.urls import url
-from django.views.generic import RedirectView
 from . import views
 
 urlpatterns = [
@@ -19,6 +18,6 @@ urlpatterns = [
     url(r'^ships/(?P<ship_id>[0-9]+)/$', views.shipinfo, name='kml_ship_info'),
     url(r'^mods/$', views.modlist, name='kml_mod'),
     url(r'^mods/(?P<mod_id>[0-9]+)/$', views.modinfo, name='kml_mod_info'),
-    url(r'^settings/$', views.settings, name='kml_settings'),
+    url(r'^settings/$', views.settingspage, name='kml_settings'),
     url(r'^new/$', views.new, name='kml_new'),
 ]

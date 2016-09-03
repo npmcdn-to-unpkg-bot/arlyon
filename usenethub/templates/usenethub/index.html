@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        height: 80%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+      var map;
+      var x;
+      var y;
+
+      navigator.geolocation.getCurrentPosition(function(location) {
+          x=location.coords.latitude.toFixed(3)
+          y=location.coords.longitude.toFixed(3)
+          console.log(x, y)
+       });
+       function initMap() {
+           console.log(x, y)
+         map = new google.maps.Map(document.getElementById('map'), {
+           center: {lat: x, lng: y},
+           zoom: 8
+         });
+        };
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCrfNqcUVg1YyrNTGcX63gLi4tzTjpHwwE&callback=initMap"
+    async defer></script>
+  </body>
+</html>

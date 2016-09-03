@@ -11,16 +11,21 @@
 <!--Import React-->
 <script type="text/javascript" src="{%static "shared/js/react.js"%}"></script>
 <script type="text/javascript" src="{%static "shared/js/react-dom.js"%}"></script>
+<script src="https://npmcdn.com/babel-core@5.8.38/browser.min.js"></script>
+
+<!-- Import ReactDND -->
+<script src="https://npmcdn.com/react-dnd@2.1.4/dist/ReactDnD.min.js"></script>
+<script src="https://npmcdn.com/react-dnd-html5-backend@2.1.2/dist/ReactDnDHTML5Backend.min.js"></script>
 
 <script type="text/javascript" src="{%static "flipper/js/datatables.min.js"%}"></script>
 <script type="text/javascript" src="{%static "flipper/js/jquery.timeago.js" %}"></script>
 <script type="text/javascript" src="https://code.highcharts.com/highcharts.js"></script>
 
-<!--Import Toaster/Sweetalert-->
-<script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-<script type="text/javascript" src="{% static "flipper/js/sweetalert.min.js" %}"></script>
-<link rel="stylesheet" type="text/css" href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
-<link rel="stylesheet" type="text/css" href="{% static "flipper/css/sweetalert.css" %}">
+<!-- sImport Vex -->
+<script src="{% static "shared/js/vex.combined.min.js" %}"></script>
+<script>vex.defaultOptions.className = 'vex-theme-flat-attack'</script>
+<link rel="stylesheet" href="{% static "shared/css/vex.css" %}" />
+<link rel="stylesheet" href="{% static "shared/css/vex-theme-flat-attack.css" %} " />
 
 {% endblock %}
 
@@ -37,6 +42,10 @@
 <li id="dash"><a href="{% url 'flipper_dash' %}"><i class="material-icons right">dashboard</i>Dashboard</a></li>
 {% endblock %}{% endblock %}
 
+{% block menu_links_unauth_only %}{% block menu_links_unauth_only2 %}
+<li id="items"><a href="{% url 'hub' %}"><i class="material-icons right">home</i>Home</a></li>
+{% endblock %}{% endblock %}
+
 {% block nav_extra %}{% block navaugment %}{% endblock %}{% endblock %}
 {% block body %}{% block content %}{% endblock %}{% endblock %}
 
@@ -51,21 +60,27 @@ function numbercrunch() {
     $(this).html(gpify(value))
 }
 
-function gpify(value) {
+function gpify(value, dolog) {
+    if (dolog==1) {
+        console.log(value)
+    }
+
     abs = Math.abs(value)
+    if(value == undefined) {
+        return '0gp'
+    }
     if(abs < 10000) {
         return Math.round(value)+"gp"
-    if(abs > 10000000000) {
-        return (value/1000000).toFixed(1)+"b"
-    }
-    }
-    if(abs > 10000000) {
-        return (value/1000000).toFixed(1)+"m"
     }
     if(abs > 10000) {
         return (value/1000).toFixed(1)+"k"
     }
-    return ''
+    if(abs > 10000000) {
+        return (value/1000000).toFixed(1)+"m"
+    }
+    if(abs > 10000000000) {
+        return (value/1000000).toFixed(1)+"b"
+    }
 }
 
 function readabletime(iso8601) {

@@ -2,9 +2,7 @@ from django.shortcuts import get_object_or_404
 from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.core import serializers
-from django.conf import settings
-from .models import agency, kerbals, settings, programs, missionstatuses, shiptypes, mods, ships, missions, colors
-from .forms import NewMissionStatus
+from .models import agency, kerbals, programs, missionstatuses, shiptypes, mods, ships, missions, colors
 from program.parsers import modimport
 import os
 
@@ -17,7 +15,7 @@ def index(request):
     if request.user.is_authenticated():
         agencyinfo = agency.objects.order_by('agency_name').first()
         print(agencyinfo)
-        if agencyinfo == None:
+        if agencyinfo is None:
             return HttpResponseRedirect("setup/")
         return HttpResponseRedirect("missions/")
     else:
@@ -30,6 +28,7 @@ def index(request):
 def importmods(request):
     modimport()
     return HttpResponseRedirect("agency/")
+
 
 def setup(request):
     template = loader.get_template('setup.html')
@@ -44,6 +43,7 @@ def setup(request):
     }
     return HttpResponse(template.render(context, request))
 
+
 def kerballist(request):
     agencyinfo = agency.objects.order_by('agency_name').first()
     kerbalslist = kerbals.objects.order_by('name')
@@ -53,6 +53,7 @@ def kerballist(request):
         'kerbalslist': kerbalslist,
     }
     return HttpResponse(template.render(context, request))
+
 
 def programlist(request):
     agencyinfo = agency.objects.order_by('agency_name').first()
@@ -91,7 +92,7 @@ def agencypage(request):
     json_serializer = serializers.get_serializer("json")()
     agencyinfo = agency.objects.order_by('agency_name').first()
     missionlist = missions.objects.order_by('programid', 'missionid')
-    shiplist = ships.objects.order_by('name')
+    '''shiplist = ships.objects.order_by('name') [currently unused]'''
     ship_types = shiptypes.objects.order_by('name')
     template = loader.get_template('agency.html')
     mission_statuses = missionstatuses.objects.order_by('name')
@@ -185,7 +186,7 @@ def missionnew(request):
     plan = request.POST['desc']
     missionid = missions.objects.filter(
         programid=programid).order_by('missionid')
-    if missionid.last() == None:
+    if missionid.last() is None:
         missionid = 1
     else:
         missionid = missionid.last().missionid + 1
@@ -193,6 +194,7 @@ def missionnew(request):
                           status=status, ship=ship, launcher=launcher, plan=plan)
     newmission.save()
     return HttpResponseRedirect("/missions/" + str(newmission.id))
+
 
 def setupcomplete(request):
     name = str(request.POST['name'])
@@ -202,7 +204,7 @@ def setupcomplete(request):
     bio = str(request.POST['agency_bio'])
     kspdir = str(request.POST['ksp_dir'])
     agencysave = agency(pk=1, agency_name=name, agency_flag=flag,
-                      agency_bio=bio, agency_color=color, ksp_dir=kspdir,)
+                        agency_bio=bio, agency_color=color, ksp_dir=kspdir,)
     agencysave.save()
     return HttpResponseRedirect("/agency/")
 
@@ -234,7 +236,8 @@ def new(request):
 
     return HttpResponse(template.render(context, request))
 
-def settings(request):
+
+def settingspage(request):
     template = loader.get_template('settings.html')
     agency_info = agency.objects.order_by('agency_name').first()
     context = {

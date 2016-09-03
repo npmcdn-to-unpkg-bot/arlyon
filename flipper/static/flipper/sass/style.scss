@@ -1,19 +1,5 @@
 // tags
 
-html {
-    overflow-y: scroll;
-}
-
-nav {
-    box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0) !important;
-}
-
-main {
-    padding: 1vmax;
-    background-color: #fafafa;
-    flex: 1 0 auto;
-}
-
 img {
     &.large {
         image-rendering: pixelated;
@@ -35,50 +21,49 @@ td {
     }
 }
 
-table {
-    .dataTable  {
-        th {
-            &:active { outline: none; }
-        }
-    }
-}
-
 thead {
     font-weight: bold;
 }
 
-body {
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
+div {
+    .card-reveal {
+        .row {
+            padding:3px;
+        }
+    }
 }
 
 // ids
+
+    #cardbtn {
+        height:100%;
+    }
+
+    #itemcard {
+        padding-left:0px;
+        padding-right:0px;
+    }
 
     // searchbar
 
     #searchbar {
         margin:0px;
+        height:64px;
     }
 
     // dashinfo
 
     #dashinfo {
         text-align: center;
-        padding: 1.2vmax;
-        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.16);
         width:100%;
         #trade {
             li {
-                height:inherit;
                 display: inline-block;
                 font-weight: bold;
                 text-shadow: 0px 2px rgba(0, 0, 0, .1);
+                font-size: 36px;
+                line-height: inherit;
                 i {
-                    font-size: 36px;
-                    line-height: inherit;
-                }
-                span {
                     font-size: 36px;
                     line-height: inherit;
                 }
@@ -93,93 +78,14 @@ body {
 
 //classes
 
-    //cards
-
-    .card {
-        display: inline-block;
-        margin-right: 15px;
-        min-width: 180px;
-        margin:10px !important;
-        min-height: 290px;
-        &::-webkit-scrollbar {
-            display: none !important;
-        }
-    }
-
-    #itemsort {
-        width:auto;
-        vertical-align: top;
-        .mix {
-            display:none;
-        }
-        .status-1,
-        .status-2,
-        .status-3 {
-            border-radius: 3px;
-            min-width: 200px;
-            min-height: 310px;
-        }
-
-        .status-1 {
-            background-color: #2196F3;
-            vertical-align: top;
-        }
-        .status-2 {
-            background-color: #4CAF50;
-            vertical-align: top;
-        }
-        .status-3 {
-            background-color: #ff9800;
-            vertical-align: top;
-        }
-    }
-
-    .wide {
-        width: 83% !important;
-        position: absolute;
-        bottom: 15px;
-        left: 15px;
-    }
-
-    .cardreveal {
-        p {
-            height: 150px;
-            overflow-y: scroll;
-        }
-    }
-
-    // misc
-
-    .row {
-            margin: none !important;
-            padding: 10px;
-            padding-left: 15px;
-        }
-
     .nopadding {
-        padding: 0px;
-    }
-
-    .nav-wrapper {
-        overflow-x: hidden;
+        padding: 0px !important;
+        margin: 0px !important;
     }
 
     .tabs .indicator {
         background-color: #ffc107;
     }
-
-// toasts
-
-#toast-container {
-    div {
-        opacity: 1;
-        box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.4) !important;
-    }
-}
-
-.toast-success {
-    background-color: #43a047;
-}
 
 // datatables
 

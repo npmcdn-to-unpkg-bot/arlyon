@@ -45,10 +45,6 @@ li>p>strong {
   text-transform: uppercase;
 }
 
-ul {
-  list-style: none;
-}
-
 .input-field {
     height:100%;
 }
@@ -72,9 +68,13 @@ nav>div.nav-wrapper>ul>li>a:hover {
 }
 
 html {
-    font-size: 14px;
+    font-size: 15px;
 }
 
 nav {
     box-shadow: 0 2px 5px 0 transparent !important;
+}
+
+div#previewModal.modal.fade.wiki-modal {
+    padding:0px;
 }

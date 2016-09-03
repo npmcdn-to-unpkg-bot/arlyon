@@ -29,6 +29,10 @@
 html {
   overflow-y: scroll; }
 
+html::-webkit-scrollbar {
+  display: none;
+}
+
 nav {
   box-shadow: 0 2px 5px 0 transparent !important; }
 
@@ -74,4 +78,15 @@ footer.page-footer {
 }
 
 @media screen and (min-width: 993px) {
+}
+
+div.toast.message-success {
+    background-color: rgb(46, 214, 78);
+}
+
+div.toast.message-error {
+    background-color: rgba(228, 29, 29, 0.91);
+}
+div.toast.message-warning {
+    background-color: rgba(233, 150, 8, 0.91);
 }
